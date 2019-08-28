@@ -6,6 +6,8 @@ import fetch from 'dva/fetch';
  * @Data 2019/8/28
  */
 const API_HOST = 'http://localhost:8079';
+const API_VERSION_1 = '/v1';
+
 const DEFAULT_OPTIONS = {
   credentials: 'include',// 同源跨域携带COOKIE
   headers: {
@@ -17,7 +19,7 @@ const DEFAULT_OPTIONS = {
 export function request(url, options) {
   const newOptions = {...DEFAULT_OPTIONS, ...options};
 
-  const newUrl = `${API_HOST}${url}`;
+  const newUrl = `${API_HOST}${API_VERSION_1}${url}`;
 
   if (newOptions.method === 'POST' ||
     newOptions.method === 'DELETE' ||

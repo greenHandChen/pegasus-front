@@ -1,4 +1,7 @@
-import {getProcessDefinitionList} from '../../services/activiti/processDefinitionService';
+import {
+  getProcessDefinitionList,
+  createProcessDefinition
+} from '../../services/activiti/processDefinitionService';
 
 export default {
   namespace: 'activiti',
@@ -10,7 +13,6 @@ export default {
   effects: {
     * getProcessDefinitionList({payload}, {call, put}) {
       const res = yield call(getProcessDefinitionList);
-      console.log(res);
       if (res) {
         yield put({
           type: 'updateState',
@@ -19,15 +21,20 @@ export default {
           }
         });
       }
+    },
+    * createProcessDefinition({payload}, {call, put}) {
+      return yield call(createProcessDefinition);
     }
   },
 
   reducers: {
     updateState(state, action) {
+      console.log(action.payload);
       return {
         ...state,
         ...action.payload
       }
     }
   }
+
 }
