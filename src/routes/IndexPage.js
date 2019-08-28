@@ -1,0 +1,59 @@
+import React from 'react';
+import {connect} from 'dva';
+import DefaultHeader from '../layouts/DefaultHeader';
+import DefaultLeftMenu from '../layouts/DefaultLeftMenu';
+import DefaultContent from '../layouts/DefaultContent';
+import DefaultFooter from '../layouts/DefaultFooter';
+import DefaultRightMenu from '../layouts/DefaultRightMenu';
+
+@connect(({global}) => ({
+  menuTree: global.menuTree
+}))
+export default class IndexPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+
+  componentDidMount() {
+    this.init();
+  }
+
+  init = () => {
+    const {dispatch} = this.props;
+    dispatch({
+      type: 'global/initMenu'
+    })
+  }
+
+  onRefDefaultContent = contentChild => {
+    this.contentChild = contentChild;
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+
+        {/* 标题栏 */}
+        <DefaultHeader/>
+
+        {/* 左侧菜单栏 */}
+        <DefaultLeftMenu/>
+
+        {/* 内容 */}
+        <DefaultContent
+          onRefDefaultContent={this.onRefDefaultContent}
+        />
+
+        {/* 版权 */}
+        <DefaultFooter/>
+
+        {/* 右侧菜单栏 */}
+        <DefaultRightMenu/>
+
+        <div className="control-sidebar-bg"></div>
+      </React.Fragment>
+    );
+  }
+}
+
