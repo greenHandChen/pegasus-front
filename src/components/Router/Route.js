@@ -1,4 +1,4 @@
-import {Route, withRouter} from 'dva/router';
+import {Route} from 'dva/router';
 
 export default class WrapperRoute extends Route {
   shouldComponentUpdate(nextProps, nextState, nextContext) {

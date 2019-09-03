@@ -1,128 +1,57 @@
-import ProcessDefinition from "../routes/activiti/ProcessDefinition";
-import Demo2 from "../components/Demo2";
+import {initMenu} from "../services/platform/menuService";
+import {generateRouterData, getTiledRouterData} from '../utils/router'
+import {deepCopy} from '../utils/util'
 
-export default {
-  namespace: 'global',
+function initGlobalModelConfig({getTiledRouterData = e => e}) {
+  return {
+    namespace: 'global',
 
-  state: {
-    menuTree: [],// 左侧菜单栏
-    tabPane: [],// 已有的tab页
-    activeKey: null// 当前激活的tab页的key
-  },
-
-  effects: {
-    * initMenu({payload}, {call, put}) {
-      yield put({
-        type: 'updateState',
-        payload: {
-          menuTree: [
-            {
-              isLeaf: false,
-              path: '/activiti',
-              name: '流程管理',
-              leftClass: 'fa fa-dashboard',
-              menuTree: [
-                {
-                  isLeaf: true,
-                  path: '/activiti/definiteProcess',
-                  name: '流程设计',
-                  component: ProcessDefinition,
-                  leftClass: 'fa fa-circle-o'
-                },
-                {
-                  isLeaf: true,
-                  path: '/activiti/startProcess',
-                  name: '流程测试',
-                  component: Demo2,
-                  leftClass: 'fa fa-circle-o'
-                }
-              ]
-            }, {
-              isLeaf: false,
-              path: '/layout',
-              name: '布局测试',
-              leftClass: 'fa fa-files-o',
-              menuTree: [
-                {
-                  isLeaf: true,
-                  path: '/layout/1',
-                  name: '布局测试1',
-                  leftClass: 'fa fa-circle-o'
-                },
-                {
-                  isLeaf: true,
-                  path: '/layout/2',
-                  name: '布局测试2',
-                  leftClass: 'fa fa-circle-o'
-                }
-              ]
-            }, {
-              isLeaf: false,
-              path: '/multiMenu',
-              name: '多级菜单',
-              leftClass: 'fa fa-share',
-              menuTree: [
-                {
-                  isLeaf: true,
-                  path: '/multiMenu/1',
-                  name: '多级菜单-One',
-                  leftClass: 'fa fa-circle-o'
-                }, {
-                  isLeaf: false,
-                  path: '/multiMenu/1',
-                  name: '多级菜单-One',
-                  leftClass: 'fa fa-circle-o',
-                  menuTree: [
-                    {
-                      isLeaf: true,
-                      path: '/multiMenu/2',
-                      name: '多级菜单-Two',
-                      leftClass: 'fa fa-circle-o'
-                    }, {
-                      isLeaf: false,
-                      path: '/multiMenu/2',
-                      name: '多级菜单-Two',
-                      leftClass: 'fa fa-circle-o',
-                      menuTree: [
-                        {
-                          isLeaf: true,
-                          path: '/multiMenu/3',
-                          name: '多级菜单-Three',
-                          leftClass: 'fa fa-circle-o'
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  isLeaf: true,
-                  path: '/multiMenu/1',
-                  name: '多级菜单-One',
-                  leftClass: 'fa fa-circle-o'
-                }
-              ]
-            }
-          ]
-        }
-      });
-    }
-  },
-
-  reducers: {
-    updateState(state, action) {
-      return {
-        ...state,
-        ...action.payload
-      };
+    state: {
+      menu: [],// 后端返回的菜单数据
+      tabPane: [],// 已有的tab页
+      activeKey: null,// 当前激活的tab页的key
+      routerData: []// 渲染菜单的数据
     },
-    addTabPane(state, {payload}) {
-      const {menu} = payload;
-      const {tabPane} = state;
-      return {
-        ...state,
-        tabPane: [...tabPane, menu],
-        activeKey: menu.path
+
+    effects: {
+      * initMenu({payload}, {call, put}) {
+        // 获取平铺后的路由数据,key为path,value为router
+        const menu = yield call(initMenu);
+        if (menu) {
+          const routerData = deepCopy(menu);
+          // 获取初步的路由数据
+          const tiledRouterData = getTiledRouterData(window.dvaApp);
+          // 加工后最终的路由数据
+          generateRouterData(routerData, tiledRouterData);
+          yield put({
+            type: 'updateState',
+            payload: {
+              menu: menu,
+              routerData
+            }
+          });
+        }
+      }
+    },
+
+    reducers: {
+      updateState(state, action) {
+        return {
+          ...state,
+          ...action.payload
+        };
+      },
+      addTabPane(state, {payload}) {
+        const {router} = payload;
+        const {tabPane} = state;
+        return {
+          ...state,
+          tabPane: [...tabPane, router],
+          activeKey: router.path
+        }
       }
     }
   }
 }
+
+export default initGlobalModelConfig({getTiledRouterData: getTiledRouterData})

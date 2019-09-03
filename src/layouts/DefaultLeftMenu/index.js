@@ -1,6 +1,7 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import {connect} from 'dva';
+import {Link} from "react-router-dom";
+import {openTabPane} from "../../utils/menuTab";
 
 /**
  * @Author: enHui.Chen
@@ -8,7 +9,7 @@ import {connect} from 'dva';
  * @Data 2019/8/21
  */
 @connect(({global}) => ({
-  menuTree: global.menuTree,
+  routerData: global.routerData,
   tabPane: global.tabPane,
   activeKey: global.activeKey
 }))
@@ -18,55 +19,33 @@ export default class DefaultLeftMenu extends React.Component {
     this.state = {}
   }
 
-  onClickMenu = (e, menu) => {
-    const {dispatch, tabPane, activeKey} = this.props;
-
-    if (!menu || typeof (menu) === 'undefined' ||
-      !menu.component || typeof (menu.component) === 'undefined') {
-      return;
-    }
-
-    // 点击菜单切换Tab
-    for (let i in tabPane) {
-      if (tabPane[i].path === menu.path) {
-        dispatch({
-          type: 'global/updateState',
-          payload: {
-            activeKey: menu.path
-          }
-        });
-        return;
-      }
-    }
-
-    // 点击菜单新增Tab
-    dispatch({
-      type: 'global/addTabPane',
-      payload: {
-        menu
-      }
-    });
+  handleClick = (e) => {
+    e.preventDefault();
   }
 
-  initMenuTree = menuTree => {
-    return menuTree.map((menu, index) => {
-      if (menu.isLeaf) {
+  onClickMenu = (router) => {
+    openTabPane(router);
+  }
+
+  initMenuTree = routerData => {
+    return routerData.map((router, index) => {
+      if (router.isLeaf) {
         return (
-          <li className={index === 0 ? 'active' : ''}>
-            <Link to={menu.path} onClick={(e) => this.onClickMenu(e, menu)}><i
-              className={menu.leftClass}></i>{menu.name}</Link>
+          <li key={router.id} className={index === 0 ? 'active' : ''}>
+            <Link to={router.path} onClick={() => this.onClickMenu(router)}>
+              <i className={router.leftClass}></i>{router.name}</Link>
           </li>
         );
       } else {
         return (
-          <li className={index === 0 ? 'active treeview' : 'treeview'}>
-            <a href="#">
-              <i className={menu.leftClass}></i> <span>{menu.name}</span>
+          <li key={router.id} className={index === 0 ? 'active treeview' : 'treeview'}>
+            <a onClick={this.handleClick}>
+              <i className={router.leftClass}></i> <span>{router.name}</span>
               <span className="pull-right-container"><i className='fa fa-angle-left pull-right'></i></span>
             </a>
             <ul className="treeview-menu">
               {
-                this.initMenuTree(menu.menuTree)
+                this.initMenuTree(router.routerData)
               }
             </ul>
           </li>
@@ -76,21 +55,17 @@ export default class DefaultLeftMenu extends React.Component {
   }
 
   render() {
-    const {
-      menuTree,
-    } = this.props;
-
     return (
       <aside className="main-sidebar">
         <section className="sidebar">
           {/*用户信息*/}
           <div className="user-panel">
             <div className="pull-left image">
-              <img src="admin_lte/dist/img/user2-160x160.jpg" className="img-circle" alt="User Image"/>
+              <img src="admin_lte/dist/img/user2-160x160.jpg" className="img-circle" alt="User Image1"/>
             </div>
             <div className="pull-left info">
               <p>Alexander Pierce</p>
-              <a href="#"><i className="fa fa-circle text-success"></i> Online</a>
+              <a onClick={this.handleClick}><i className="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
           {/*搜索框*/}
@@ -107,7 +82,7 @@ export default class DefaultLeftMenu extends React.Component {
           {/*菜单导航*/}
           <ul className="sidebar-menu" data-widget="tree">
             <li className="header">MAIN NAVIGATION</li>
-            {this.initMenuTree(menuTree)}
+            {this.initMenuTree(this.props.routerData)}
           </ul>
         </section>
       </aside>

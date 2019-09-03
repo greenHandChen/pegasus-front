@@ -1,6 +1,8 @@
 import {
+  createProcessDefinition,
+  deleteProcessDefinition,
   getProcessDefinitionList,
-  createProcessDefinition
+  deployProcessDefinition
 } from '../../services/activiti/processDefinitionService';
 
 export default {
@@ -12,7 +14,7 @@ export default {
 
   effects: {
     * getProcessDefinitionList({payload}, {call, put}) {
-      const res = yield call(getProcessDefinitionList);
+      const res = yield call(getProcessDefinitionList, payload);
       if (res) {
         yield put({
           type: 'updateState',
@@ -23,13 +25,29 @@ export default {
       }
     },
     * createProcessDefinition({payload}, {call, put}) {
-      return yield call(createProcessDefinition);
+      yield call(createProcessDefinition, payload);
+      yield put({
+        type: 'getProcessDefinitionList'
+      });
+    },
+
+    * deleteProcessDefinition({payload}, {call, put}) {
+      yield call(deleteProcessDefinition, payload);
+      yield put({
+        type: 'getProcessDefinitionList'
+      });
+    },
+
+    * deployProcessDefinition({payload}, {call, put}){
+      yield call(deployProcessDefinition, payload);
+      yield put({
+        type: 'getProcessDefinitionList'
+      });
     }
   },
 
   reducers: {
     updateState(state, action) {
-      console.log(action.payload);
       return {
         ...state,
         ...action.payload

@@ -8,7 +8,13 @@ import React from 'react';
 export default class DefaultRightMenu extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
+
+  handleClick = (e) => {
+    e.preventDefault();
+  }
+
 
   render() {
     return (
@@ -25,7 +31,7 @@ export default class DefaultRightMenu extends React.Component {
             <h3 className="control-sidebar-heading">Recent Activity</h3>
             <ul className="control-sidebar-menu">
               <li>
-                <a href="javascript:void(0)">
+                <a onClick={this.handleClick}>
                   <i className="menu-icon fa fa-birthday-cake bg-red"></i>
 
                   <div className="menu-info">
@@ -36,7 +42,7 @@ export default class DefaultRightMenu extends React.Component {
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0)">
+                <a onClick={this.handleClick}>
                   <i className="menu-icon fa fa-user bg-yellow"></i>
 
                   <div className="menu-info">
@@ -47,7 +53,7 @@ export default class DefaultRightMenu extends React.Component {
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0)">
+                <a onClick={this.handleClick}>
                   <i className="menu-icon fa fa-envelope-o bg-light-blue"></i>
 
                   <div className="menu-info">
@@ -58,7 +64,7 @@ export default class DefaultRightMenu extends React.Component {
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0)">
+                <a onClick={this.handleClick}>
                   <i className="menu-icon fa fa-file-code-o bg-green"></i>
 
                   <div className="menu-info">
@@ -73,7 +79,7 @@ export default class DefaultRightMenu extends React.Component {
             <h3 className="control-sidebar-heading">Tasks Progress</h3>
             <ul className="control-sidebar-menu">
               <li>
-                <a href="javascript:void(0)">
+                <a onClick={this.handleClick}>
                   <h4 className="control-sidebar-subheading">
                     Custom Template Design
                     <span className="label label-danger pull-right">70%</span>
@@ -85,7 +91,7 @@ export default class DefaultRightMenu extends React.Component {
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0)">
+                <a onClick={this.handleClick}>
                   <h4 className="control-sidebar-subheading">
                     Update Resume
                     <span className="label label-success pull-right">95%</span>
@@ -97,7 +103,7 @@ export default class DefaultRightMenu extends React.Component {
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0)">
+                <a onClick={this.handleClick}>
                   <h4 className="control-sidebar-subheading">
                     Laravel Integration
                     <span className="label label-warning pull-right">50%</span>
@@ -109,7 +115,7 @@ export default class DefaultRightMenu extends React.Component {
                 </a>
               </li>
               <li>
-                <a href="javascript:void(0)">
+                <a onClick={this.handleClick}>
                   <h4 className="control-sidebar-subheading">
                     Back End Framework
                     <span className="label label-primary pull-right">68%</span>
@@ -133,7 +139,7 @@ export default class DefaultRightMenu extends React.Component {
               <div className="form-group">
                 <label className="control-sidebar-subheading">
                   Report panel usage
-                  <input type="checkbox" className="pull-right" checked/>
+                  <input type="checkbox" className="pull-right" defaultChecked={true}/>
                 </label>
 
                 <p>
@@ -144,7 +150,7 @@ export default class DefaultRightMenu extends React.Component {
               <div className="form-group">
                 <label className="control-sidebar-subheading">
                   Allow mail redirect
-                  <input type="checkbox" className="pull-right" checked/>
+                  <input type="checkbox" className="pull-right"  defaultChecked={true}/>
                 </label>
 
                 <p>
@@ -155,7 +161,7 @@ export default class DefaultRightMenu extends React.Component {
               <div className="form-group">
                 <label className="control-sidebar-subheading">
                   Expose author name in posts
-                  <input type="checkbox" className="pull-right" checked/>
+                  <input type="checkbox" className="pull-right"  defaultChecked={true}/>
                 </label>
 
                 <p>
@@ -168,7 +174,7 @@ export default class DefaultRightMenu extends React.Component {
               <div className="form-group">
                 <label className="control-sidebar-subheading">
                   Show me as online
-                  <input type="checkbox" className="pull-right" checked/>
+                  <input type="checkbox" className="pull-right"  defaultChecked={true}/>
                 </label>
               </div>
 
@@ -182,7 +188,7 @@ export default class DefaultRightMenu extends React.Component {
               <div className="form-group">
                 <label className="control-sidebar-subheading">
                   Delete chat history
-                  <a href="javascript:void(0)" className="text-red pull-right"><i className="fa fa-trash-o"></i></a>
+                  <a onClick={this.handleClick} className="text-red pull-right"><i className="fa fa-trash-o"></i></a>
                 </label>
               </div>
             </form>

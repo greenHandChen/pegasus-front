@@ -3,6 +3,7 @@ import {Tabs} from 'antd';
 import Content from "../../components/Router";
 import {connect} from 'dva';
 import {routerRedux} from 'dva/router';
+import {openTabPane} from '../../utils/menuTab';
 
 const {TabPane} = Tabs;
 
@@ -23,23 +24,7 @@ export default class DefaultContent extends React.Component {
   }
 
   onClickTab = activeKey => {
-    // 点击Tab标签切换Tab
-    const {dispatch, tabPane} = this.props;
-    for (let i in tabPane) {
-      if (tabPane[i].path === activeKey) {
-        dispatch({
-          type: 'global/updateState',
-          payload: {
-            activeKey: activeKey
-          }
-        });
-        break;
-      }
-    }
-    // 点击Tab标签修改路由地址
-    dispatch(routerRedux.push({
-      pathname: activeKey
-    }));
+    openTabPane({}, activeKey);
   };
 
   onEdit = (targetKey, action) => {
@@ -79,7 +64,7 @@ export default class DefaultContent extends React.Component {
     return (
       <div className="content-wrapper">
         <section className="content">
-          <div style={{backgroundColor: '#ffff', padding: '15px', borderRadius: '3px'}}>
+          <div style={{backgroundColor: '#ffff', padding: '15px', borderRadius: '3px', height: '100%'}}>
             <Tabs
               hideAdd
               onChange={this.onClickTab}
@@ -88,10 +73,10 @@ export default class DefaultContent extends React.Component {
               onEdit={this.onEdit}
             >
               {
-                tabPane.map(menu => (
-                  <TabPane tab={menu.name} key={menu.path}>
+                tabPane.map(pane => (
+                  <TabPane tab={pane.name} key={pane.path}>
                     <Content
-                      menu={menu}
+                      pane={pane}
                       activeKey
                     />
                   </TabPane>

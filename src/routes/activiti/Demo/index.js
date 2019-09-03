@@ -1,9 +1,6 @@
 import React from "react";
 
-export default class Demo2 extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+export default class Index extends React.Component {
 
   render() {
     return (<div>

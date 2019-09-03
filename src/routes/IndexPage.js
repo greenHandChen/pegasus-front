@@ -32,8 +32,7 @@ export default class IndexPage extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-
+      <div className="wrapper">
         {/* 标题栏 */}
         <DefaultHeader/>
 
@@ -52,7 +51,7 @@ export default class IndexPage extends React.Component {
         <DefaultRightMenu/>
 
         <div className="control-sidebar-bg"></div>
-      </React.Fragment>
+      </div>
     );
   }
 }

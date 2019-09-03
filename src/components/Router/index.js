@@ -5,20 +5,20 @@ import Route from './Route';
 export default class Content extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
   render() {
     const {
-      menu,
-      activeKey
+      pane
     } = this.props;
 
     return (
       <Switch
-        tabKey={menu.path}
+        tabKey={pane.path}
         activeKey
       >
-        <Route path={menu.path} component={menu.component}/>
+        <Route path={pane.path} component={pane.component}/>
       </Switch>
     );
   }
