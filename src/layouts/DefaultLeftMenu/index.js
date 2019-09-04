@@ -61,10 +61,10 @@ export default class DefaultLeftMenu extends React.Component {
           {/*用户信息*/}
           <div className="user-panel">
             <div className="pull-left image">
-              <img src="admin_lte/dist/img/user2-160x160.jpg" className="img-circle" alt="User Image1"/>
+              <img src={require('../../assets/bigP.jpg')} className="img-circle" alt="User Image1"/>
             </div>
             <div className="pull-left info">
-              <p>Alexander Pierce</p>
+              <p>Enhui Chen</p>
               <a onClick={this.handleClick}><i className="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>

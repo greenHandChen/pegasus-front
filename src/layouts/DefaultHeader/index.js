@@ -46,7 +46,7 @@ export default class DefaultHeader extends React.Component {
                       <li>
                         <a onClick={this.handleClick}>
                           <div className="pull-left">
-                            <img src={require('../../../public/admin_lte/dist/img/user2-160x160.jpg')}
+                            <img src={require('../../assets/bigP.jpg')}
                                  className="img-circle"
                                  alt="User Image1"/>
                           </div>
@@ -61,7 +61,7 @@ export default class DefaultHeader extends React.Component {
                       <li>
                         <a onClick={this.handleClick}>
                           <div className="pull-left">
-                            <img src={require('../../../public/admin_lte/dist/img/user3-128x128.jpg')}
+                            <img src={require('../../assets/bigP.jpg')}
                                  className="img-circle"
                                  alt="User Image2"/>
                           </div>
@@ -75,7 +75,7 @@ export default class DefaultHeader extends React.Component {
                       <li>
                         <a onClick={this.handleClick}>
                           <div className="pull-left">
-                            <img src={require('../../../public/admin_lte/dist/img/user4-128x128.jpg')}
+                            <img src={require('../../assets/bigP.jpg')}
                                  className="img-circle"
                                  alt="User Image3"/>
                           </div>
@@ -89,7 +89,7 @@ export default class DefaultHeader extends React.Component {
                       <li>
                         <a onClick={this.handleClick}>
                           <div className="pull-left">
-                            <img src={require('../../../public/admin_lte/dist/img/user3-128x128.jpg')}
+                            <img src={require('../../assets/bigP.jpg')}
                                  className="img-circle"
                                  alt="User Imag4"/>
                           </div>
@@ -103,7 +103,7 @@ export default class DefaultHeader extends React.Component {
                       <li>
                         <a onClick={this.handleClick}>
                           <div className="pull-left">
-                            <img src={require('../../../public/admin_lte/dist/img/user4-128x128.jpg')}
+                            <img src={require('../../assets/bigP.jpg')}
                                  className="img-circle"
                                  alt="User Image5"/>
                           </div>
@@ -247,14 +247,14 @@ export default class DefaultHeader extends React.Component {
               {/*User Account: style can be found in dropdown.less*/}
               <li className="dropdown user user-menu">
                 <a onClick={this.handleClick} className="dropdown-toggle" data-toggle="dropdown">
-                  <img src={require('../../../public/admin_lte/dist/img/user2-160x160.jpg')} className="user-image"
+                  <img src={require('../../assets/bigP.jpg')} className="user-image"
                        alt="User Image6"/>
                   <span className="hidden-xs">Alexander Pierce</span>
                 </a>
                 <ul className="dropdown-menu">
                   {/*User image*/}
                   <li className="user-header">
-                    <img src="admin_lte/dist/img/user2-160x160.jpg" className="img-circle"
+                    <img src={require('../../assets/bigP.jpg')} className="img-circle"
                          alt="User Image7"/>
                     <p>
                       Alexander Pierce - Web Developer
