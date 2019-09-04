@@ -1,23 +1,29 @@
 import {Route} from 'dva/router';
 import React from "react";
-import {getStorage} from "../../utils/util";
+import {ACCESS_TOKEN, AUTH_URL} from "../../../config/config";
+import {ACCESS_TOKEN_REG} from "../../../config/regExp";
+import {getStorage, setStorage} from "../../utils/util";
 
 export default class AuthenticatedRoute extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isLogin: !getStorage('token')
-    }
+    this.state = {}
   }
 
   render() {
-    const {path} = this.props;
+    const accessTokenGroup = window.location.href.match(ACCESS_TOKEN_REG);
+    const accessToken = !accessTokenGroup || typeof accessTokenGroup === 'undefined' ? null : accessTokenGroup[0].split('=')[1];
+
+    if (accessToken) {
+      setStorage(ACCESS_TOKEN, accessToken);
+    }
+
     return (
-      <Route path={path} render={(props) => {
-        if (this.state.isLogin) {
+      <Route path={this.props.path} render={(props) => {
+        if (getStorage(ACCESS_TOKEN)) {
           return <this.props.component {...props}/>
         }
-        return <div>未登录</div>
+        window.open(AUTH_URL, '_self')
       }}/>
     )
   }

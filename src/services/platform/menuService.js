@@ -6,7 +6,7 @@
 import {request} from "../../utils/request";
 
 export async function initMenu(params) {
-  return request("/menu/findAll", {
+  return request("/v1/menu/findAll", {
     method: 'GET'
   })
 }

@@ -6,7 +6,7 @@ import {request} from "../../utils/request";
  * @Data 2019/8/28
  */
 export async function getProcessDefinitionList(params) {
-  return request(`/activiti/find/processDefinition`, {
+  return request(`/v1/activiti/find/processDefinition`, {
     method: 'GET',
     query: params
   });
@@ -18,7 +18,7 @@ export async function getProcessDefinitionList(params) {
  * @Data 2019/8/28
  */
 export async function createProcessDefinition(params) {
-  return request(`/activiti/create/processDefinition`, {
+  return request(`/v1/activiti/create/processDefinition`, {
     method: 'POST',
     body: params
   });
@@ -30,7 +30,7 @@ export async function createProcessDefinition(params) {
  * @Data 2019/8/28
  */
 export async function deleteProcessDefinition(params) {
-  return request(`/activiti/delete/processDefinition/${params.modelId}`, {
+  return request(`/v1/activiti/delete/processDefinition/${params.modelId}`, {
     method: 'DELETE',
     responseType: 'text'
   });
@@ -42,7 +42,7 @@ export async function deleteProcessDefinition(params) {
  * @Data 2019/8/28
  */
 export async function deployProcessDefinition(params) {
-  return request(`/activiti/deploy/processDefinition/${params.modelId}`, {
+  return request(`/v1/activiti/deploy/processDefinition/${params.modelId}`, {
     method: 'POST',
     responseType: 'text'
   });
