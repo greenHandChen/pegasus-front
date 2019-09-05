@@ -54,6 +54,11 @@ export function setStorage(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
+export function removeStorage(key) {
+  localStorage.removeItem(key);
+}
+
+
 /**
  * @Author: enHui.Chen
  * @Description: 简单的深拷贝(不拷贝方法)

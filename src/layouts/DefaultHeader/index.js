@@ -1,10 +1,14 @@
 import React from 'react';
+import {connect} from "dva";
 
 /**
  * @Author: enHui.Chen
  * @Description: 标题栏
  * @Data 2019/8/21
  */
+@connect(({login}) => {
+
+})
 export default class DefaultHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -13,6 +17,12 @@ export default class DefaultHeader extends React.Component {
 
   handleClick = (e) => {
     e.preventDefault();
+  }
+
+  handleLogout = () => {
+    this.props.dispatch({
+      type: 'login/logout'
+    });
   }
 
   render() {
@@ -249,7 +259,7 @@ export default class DefaultHeader extends React.Component {
                 <a onClick={this.handleClick} className="dropdown-toggle" data-toggle="dropdown">
                   <img src={require('../../assets/bigP.jpg')} className="user-image"
                        alt="User Image6"/>
-                  <span className="hidden-xs">Alexander Pierce</span>
+                  <span className="hidden-xs">Enhui Chen</span>
                 </a>
                 <ul className="dropdown-menu">
                   {/*User image*/}
@@ -257,7 +267,7 @@ export default class DefaultHeader extends React.Component {
                     <img src={require('../../assets/bigP.jpg')} className="img-circle"
                          alt="User Image7"/>
                     <p>
-                      Alexander Pierce - Web Developer
+                      Enhui Chen - Web Developer
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
@@ -278,10 +288,10 @@ export default class DefaultHeader extends React.Component {
                   {/*Menu Footer*/}
                   <li className="user-footer">
                     <div className="pull-left">
-                      <a onClick={this.handleClick} className="btn btn-default btn-flat">Profile</a>
+                      <a onClick={this.handleClick} className="btn btn-default btn-flat">个人配置</a>
                     </div>
                     <div className="pull-right">
-                      <a onClick={this.handleClick} className="btn btn-default btn-flat">Sign out</a>
+                      <a onClick={this.handleLogout} className="btn btn-default btn-flat">注销</a>
                     </div>
                   </li>
                 </ul>
