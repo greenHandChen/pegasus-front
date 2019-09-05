@@ -8,10 +8,11 @@ import {openTabPane} from "../../utils/menuTab";
  * @Description: 左侧菜单栏
  * @Data 2019/8/21
  */
-@connect(({global}) => ({
+@connect(({global, user}) => ({
   routerData: global.routerData,
   tabPane: global.tabPane,
-  activeKey: global.activeKey
+  activeKey: global.activeKey,
+  currentUser: user.currentUser
 }))
 export default class DefaultLeftMenu extends React.Component {
   constructor(props) {
@@ -55,6 +56,9 @@ export default class DefaultLeftMenu extends React.Component {
   }
 
   render() {
+    const {
+      currentUser
+    } = this.props;
     return (
       <aside className="main-sidebar">
         <section className="sidebar">
@@ -64,8 +68,8 @@ export default class DefaultLeftMenu extends React.Component {
               <img src={require('../../assets/bigP.jpg')} className="img-circle" alt="User Image1"/>
             </div>
             <div className="pull-left info">
-              <p>Enhui Chen</p>
-              <a onClick={this.handleClick}><i className="fa fa-circle text-success"></i> Online</a>
+              <p>{currentUser.fullName}</p>
+              <a onClick={this.handleClick}><i className="fa fa-circle text-success"></i> {currentUser.status}</a>
             </div>
           </div>
           {/*搜索框*/}

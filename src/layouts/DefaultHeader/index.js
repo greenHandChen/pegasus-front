@@ -6,9 +6,9 @@ import {connect} from "dva";
  * @Description: 标题栏
  * @Data 2019/8/21
  */
-@connect(({login}) => {
-
-})
+@connect(({user}) => ({
+  currentUser: user.currentUser
+}))
 export default class DefaultHeader extends React.Component {
   constructor(props) {
     super(props);
@@ -26,6 +26,9 @@ export default class DefaultHeader extends React.Component {
   }
 
   render() {
+    const {
+      currentUser
+    } = this.props;
     return (
       <header className="main-header">
         {/*左上角标题*/}
@@ -259,7 +262,7 @@ export default class DefaultHeader extends React.Component {
                 <a onClick={this.handleClick} className="dropdown-toggle" data-toggle="dropdown">
                   <img src={require('../../assets/bigP.jpg')} className="user-image"
                        alt="User Image6"/>
-                  <span className="hidden-xs">Enhui Chen</span>
+                  <span className="hidden-xs">{currentUser.fullName}</span>
                 </a>
                 <ul className="dropdown-menu">
                   {/*User image*/}
@@ -267,7 +270,7 @@ export default class DefaultHeader extends React.Component {
                     <img src={require('../../assets/bigP.jpg')} className="img-circle"
                          alt="User Image7"/>
                     <p>
-                      Enhui Chen - Web Developer
+                      {`${currentUser.fullName} - ${currentUser.title}`}
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
