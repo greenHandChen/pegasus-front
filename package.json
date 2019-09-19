@@ -1,7 +1,7 @@
 {
-  "name": "full-stack-front",
+  "name": "pegasus-front",
   "version": "0.0.1",
-  "description": "Full Stack Front",
+  "description": "Pegasus Front",
   "private": true,
   "scripts": {
     "start": "roadhog server",

@@ -6,7 +6,7 @@ import {
 } from '../../services/activiti/processDefinitionService';
 
 export default {
-  namespace: 'activiti',
+  namespace: 'processDefinition',
 
   state: {
     processDefinitionList: []

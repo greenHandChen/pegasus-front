@@ -1,6 +1,6 @@
-import {getAccessToken} from '../services/authorize/authorizeService';
-import {getLocalAccessToken, removeAccessToken} from "../utils/authorize";
-import {AUTH_LOGOUT_URL} from '../../config/config';
+import {getAccessToken} from '../../services/authorize/authorizeService';
+import {getLocalAccessToken, removeAccessToken} from "../../utils/authorize";
+import {AUTH_LOGOUT_URL} from '../../../config/config';
 
 export default {
   namespace: 'login',

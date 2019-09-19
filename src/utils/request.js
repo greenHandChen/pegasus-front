@@ -53,6 +53,12 @@ export function request(url, options) {
       if (res.status === 401) {
         window.open(AUTH_URL, '_self');
       }
+
+      // no-content
+      if (res.status === 204) {
+        return {};
+      }
+
       if (res.status >= 200 && res.status < 300) {
         return newOptions.responseType === 'text' ? res.text : res.json();
       }

@@ -6,8 +6,8 @@ import BreathTag from '../../../components/BreathTag';
 import Modal from '../../../components/Modal';
 
 @Form.create({name: 'processDefinition'})
-@connect(({activiti}) => ({
-  processDefinitionList: activiti.processDefinitionList
+@connect(({processDefinition}) => ({
+  processDefinitionList: processDefinition.processDefinitionList
 }))
 export default class ProcessDefinition extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class ProcessDefinition extends React.Component {
   handleGetProcessDefinitionList = (name) => {
     const {dispatch} = this.props;
     dispatch({
-      type: 'activiti/getProcessDefinitionList',
+      type: 'processDefinition/getProcessDefinitionList',
       payload: {
         name
       }
@@ -41,7 +41,7 @@ export default class ProcessDefinition extends React.Component {
     form.validateFieldsAndScroll(err => {
       if (!err) {
         dispatch({
-          type: 'activiti/createProcessDefinition',
+          type: 'processDefinition/createProcessDefinition',
           payload: form.getFieldsValue()
         });
       }
@@ -51,7 +51,7 @@ export default class ProcessDefinition extends React.Component {
   handleDeleteProcessDefinition = (modelId) => {
     const {dispatch} = this.props;
     dispatch({
-      type: 'activiti/deleteProcessDefinition',
+      type: 'processDefinition/deleteProcessDefinition',
       payload: {
         modelId
       }
@@ -61,7 +61,7 @@ export default class ProcessDefinition extends React.Component {
   handleDeployProcessDefinition = (modelId) => {
     const {dispatch} = this.props;
     dispatch({
-      type: 'activiti/deployProcessDefinition',
+      type: 'processDefinition/deployProcessDefinition',
       payload: {
         modelId
       }

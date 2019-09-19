@@ -66,7 +66,7 @@ function modelIsExist(app, model) {
  */
 export function generateRouterData(routerData, tiledRouterData) {
   routerData.forEach(r => {
-    if (!r.isLeaf) {
+    if (!r.isLeaf && r.routerData && typeof r.routerData !== "undefined") {
       return generateRouterData(r.routerData, tiledRouterData);
     }
     if (typeof tiledRouterData[r.path] !== "undefined") {

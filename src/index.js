@@ -10,8 +10,8 @@ window.dvaApp = app;
 
 // 3. 载入model
 app.model(require('./models/global').default);
-app.model(require('./models/login').default);
-app.model(require('./models/user').default);
+app.model(require('./models/authorize/login').default);
+app.model(require('./models/authorize/user').default);
 
 // 4. 配置路由
 app.router(require('./router').default);

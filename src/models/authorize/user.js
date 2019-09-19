@@ -1,4 +1,4 @@
-import {getCurrentUser} from '../services/platform/userService'
+import {getCurrentUser} from '../../services/authorize/userService'
 
 export default {
   namespace: 'user',
@@ -18,13 +18,12 @@ export default {
           }
         });
       }
+      return currentUser;
     }
   },
 
   reducers: {
     updateState(state, action) {
-      console.log(state)
-      console.log(action.payload)
       return {
         ...state,
         ...action.payload

@@ -1,4 +1,5 @@
-import {initMenu} from "../services/platform/menuService";
+import {initMenuByRoleId} from "../services/authorize/menuService";
+import {initMenuAll} from "../services/authorize/userService";
 import {generateRouterData, getTiledRouterData} from '../utils/router'
 import {deepCopy} from '../utils/util'
 
@@ -14,9 +15,27 @@ function initGlobalModelConfig({getTiledRouterData = e => e}) {
     },
 
     effects: {
-      * initMenu({payload}, {call, put}) {
+      * initMenuAll({payload}, {call, put}) {
         // 获取平铺后的路由数据,key为path,value为router
-        const menu = yield call(initMenu);
+        const menu = yield call(initMenuAll);
+        if (menu) {
+          const routerData = deepCopy(menu);
+          // 获取初步的路由数据
+          const tiledRouterData = getTiledRouterData(window.dvaApp);
+          // 加工后最终的路由数据
+          generateRouterData(routerData, tiledRouterData);
+          yield put({
+            type: 'updateState',
+            payload: {
+              menu: menu,
+              routerData
+            }
+          });
+        }
+      },
+      * initMenuByRoleId({payload}, {call, put}) {
+        // 获取平铺后的路由数据,key为path,value为route
+        const menu = yield call(initMenuByRoleId);
         if (menu) {
           const routerData = deepCopy(menu);
           // 获取初步的路由数据
@@ -32,6 +51,8 @@ function initGlobalModelConfig({getTiledRouterData = e => e}) {
           });
         }
       }
+
+
     },
 
     reducers: {

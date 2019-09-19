@@ -1,25 +1,42 @@
 module.exports = [
+  /** 工作流路由 start */
   {
-    path: '/activiti',
+    path: '/activiti/processDefinition',
     models: [
-      'activiti/activiti'
+      'activiti/processDefinition'
     ],
-    components: [
-      {
-        path: '/activiti/definiteProcess',
-        models: [
-          'activiti/activiti'
-        ],
-        component: 'activiti/ProcessDefinition'
-      },
-      {
-        path: '/activiti/startProcess',
-        models: [
-          'activiti/activiti'
-        ],
-        // TODO
-        component: 'activiti/Demo'
-      }
-    ]
+    component: 'activiti/ProcessDefinition'
+  },
+  {
+    path: '/activiti/processTest',
+    models: [
+      'activiti/processTest'
+    ],
+    component: 'activiti/ProcessTest'
+  },
+  {
+    path: '/activiti/processTodoTask',
+    models: [
+      // TODO
+      'activiti/processTodoTask'
+    ],
+    component: 'activiti/ProcessTodoTask'
+  },
+  {
+    path: '/activiti/todoTask',
+    models: [
+      // TODO
+      'activiti/processDefinition'
+    ],
+    component: 'activiti/TodoTask'
+  },
+  /** 工作流路由 end */
+  {
+    path: '/platform/menuTree',
+    models: [
+      // TODO
+      'activiti/processDefinition'
+    ],
+    component: 'platform/Menu'
   }
 ]

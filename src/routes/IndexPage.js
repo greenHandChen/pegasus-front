@@ -6,7 +6,7 @@ import DefaultContent from '../layouts/DefaultContent';
 import DefaultFooter from '../layouts/DefaultFooter';
 import DefaultRightMenu from '../layouts/DefaultRightMenu';
 
-@connect(({global,user}) => ({
+@connect(({global, user}) => ({
   menuTree: global.menuTree
 }))
 export default class IndexPage extends React.Component {
@@ -16,17 +16,23 @@ export default class IndexPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'user/getCurrentUser'
-    });
     this.init();
   }
 
   init = () => {
     const {dispatch} = this.props;
     dispatch({
-      type: 'global/initMenu'
-    })
+      type: 'user/getCurrentUser'
+    }).then((user) => {
+      if (user) {
+        dispatch({
+          type: 'global/initMenuByRoleId',
+          payload: {
+            roleId: user.roleId
+          }
+        })
+      }
+    });
   }
 
   onRefDefaultContent = contentChild => {

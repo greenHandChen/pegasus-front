@@ -29,17 +29,20 @@ export default class DefaultLeftMenu extends React.Component {
   }
 
   initMenuTree = routerData => {
+    if (!routerData || typeof routerData === 'undefined') {
+      return;
+    }
     return routerData.map((router, index) => {
       if (router.isLeaf) {
         return (
-          <li key={router.id} className={index === 0 ? 'active' : ''}>
+          <li key={router.id} className={''}>
             <Link to={router.path} onClick={() => this.onClickMenu(router)}>
               <i className={router.leftClass}></i>{router.name}</Link>
           </li>
         );
       } else {
         return (
-          <li key={router.id} className={index === 0 ? 'active treeview' : 'treeview'}>
+          <li key={router.id} className={'treeview'}>
             <a onClick={this.handleClick}>
               <i className={router.leftClass}></i> <span>{router.name}</span>
               <span className="pull-right-container"><i className='fa fa-angle-left pull-right'></i></span>
