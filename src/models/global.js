@@ -15,24 +15,6 @@ function initGlobalModelConfig({getTiledRouterData = e => e}) {
     },
 
     effects: {
-      * initMenuAll({payload}, {call, put}) {
-        // 获取平铺后的路由数据,key为path,value为router
-        const menu = yield call(initMenuAll);
-        if (menu) {
-          const routerData = deepCopy(menu);
-          // 获取初步的路由数据
-          const tiledRouterData = getTiledRouterData(window.dvaApp);
-          // 加工后最终的路由数据
-          generateRouterData(routerData, tiledRouterData);
-          yield put({
-            type: 'updateState',
-            payload: {
-              menu: menu,
-              routerData
-            }
-          });
-        }
-      },
       * initMenuByRoleId({payload}, {call, put}) {
         // 获取平铺后的路由数据,key为path,value为route
         const menu = yield call(initMenuByRoleId);

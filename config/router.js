@@ -17,7 +17,6 @@ module.exports = [
   {
     path: '/activiti/processTodoTask',
     models: [
-      // TODO
       'activiti/processTodoTask'
     ],
     component: 'activiti/ProcessTodoTask'
@@ -31,12 +30,14 @@ module.exports = [
     component: 'activiti/TodoTask'
   },
   /** 工作流路由 end */
+  /** 平台功能路由 start */
   {
     path: '/platform/menuTree',
     models: [
-      // TODO
-      'activiti/processDefinition'
+      'platform/menu'
     ],
     component: 'platform/Menu'
   }
+  /** 平台功能路由 end */
+
 ]

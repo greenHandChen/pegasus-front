@@ -5,8 +5,8 @@
  */
 import {request} from "../../utils/request";
 
-export async function initMenuAll(params) {
-  return request("/v1/menu/initMenuAll", {
+export async function findMenuAll(params) {
+  return request("/v1/menu/findMenuAll", {
     method: 'GET'
   })
 }

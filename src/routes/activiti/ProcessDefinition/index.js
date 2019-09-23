@@ -1,9 +1,10 @@
 import React from "react";
 import {connect} from 'dva';
 import moment from 'moment';
-import {Button, Divider, Form, Input, Table, Tag} from 'antd';
+import {Button, Divider, Form, Input, Tag} from 'antd';
 import BreathTag from '../../../components/BreathTag';
 import Modal from '../../../components/Modal';
+import Table from '../../../components/Table';
 
 @Form.create({name: 'processDefinition'})
 @connect(({processDefinition}) => ({
@@ -171,7 +172,6 @@ export default class ProcessDefinition extends React.Component {
         </div>
         <Table
           columns={columns}
-          bordered
           dataSource={processDefinitionList}
         />
         <Modal {...createModal}/>

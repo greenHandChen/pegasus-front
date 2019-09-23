@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from 'dva';
-import {Divider, Form, Table, Tag} from 'antd';
+import {Divider, Form, Tag} from 'antd';
+import Table from '../../../components/Table';
 
 @Form.create({name: 'processTodoTask'})
 @connect(({processTodoTask}) => ({
@@ -113,7 +114,6 @@ export default class ProcessDefinition extends React.Component {
       <React.Fragment>
         <Table
           columns={columns}
-          bordered
           dataSource={todoTaskList}
         />
       </React.Fragment>
