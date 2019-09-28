@@ -1,7 +1,5 @@
 import React from "react";
-import {Button, Drawer, Form, Select} from 'antd';
-
-const {Option} = Select;
+import {Button, Drawer, Form} from 'antd';
 
 @Form.create({name: 'menuForm'})
 export default class WrapperDrawer extends React.Component {

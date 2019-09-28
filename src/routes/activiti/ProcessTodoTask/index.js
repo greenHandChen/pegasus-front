@@ -4,8 +4,9 @@ import {Divider, Form, Tag} from 'antd';
 import Table from '../../../components/Table';
 
 @Form.create({name: 'processTodoTask'})
-@connect(({processTodoTask}) => ({
-  todoTaskList: processTodoTask.todoTaskList
+@connect(({loading, processTodoTask}) => ({
+  todoTaskList: processTodoTask.todoTaskList,
+  todoTaskLoading: loading.effects['processTodoTask/findTaskAdminAssignee']
 }))
 export default class ProcessDefinition extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export default class ProcessDefinition extends React.Component {
       type: 'processTodoTask/completeTask',
       payload: {
         taskId,
-        outcome:'approve'
+        outcome: 'approve'
       }
     })
   }
@@ -42,7 +43,7 @@ export default class ProcessDefinition extends React.Component {
       type: 'processTodoTask/completeTask',
       payload: {
         taskId,
-        outcome:'reject'
+        outcome: 'reject'
       }
     })
   }
@@ -50,9 +51,10 @@ export default class ProcessDefinition extends React.Component {
   render() {
     const {
       todoTaskList,
-/*
-      form: {getFieldDecorator}
-*/
+      todoTaskLoading
+      /*
+            form: {getFieldDecorator}
+      */
     } = this.props;
 
 
@@ -113,6 +115,7 @@ export default class ProcessDefinition extends React.Component {
     return (
       <React.Fragment>
         <Table
+          loading={todoTaskLoading}
           columns={columns}
           dataSource={todoTaskList}
         />

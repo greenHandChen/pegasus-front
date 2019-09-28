@@ -1,4 +1,5 @@
 import dva from 'dva';
+import createLoading from 'dva-loading';
 
 // 1. 初始化 state 的数据
 const app = dva();
@@ -6,7 +7,7 @@ const app = dva();
 window.dvaApp = app;
 
 // 2. 增加插件
-// app.use({});
+app.use(createLoading());
 
 // 3. 载入model
 app.model(require('./models/global').default);

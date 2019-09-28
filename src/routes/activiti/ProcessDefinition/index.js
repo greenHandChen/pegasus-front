@@ -7,8 +7,9 @@ import Modal from '../../../components/Modal';
 import Table from '../../../components/Table';
 
 @Form.create({name: 'processDefinition'})
-@connect(({processDefinition}) => ({
-  processDefinitionList: processDefinition.processDefinitionList
+@connect(({loading, processDefinition}) => ({
+  processDefinitionList: processDefinition.processDefinitionList,
+  processDefinitionLoading: loading.effects['processDefinition/getProcessDefinitionList']
 }))
 export default class ProcessDefinition extends React.Component {
   constructor(props) {
@@ -72,6 +73,7 @@ export default class ProcessDefinition extends React.Component {
   render() {
     const {
       processDefinitionList,
+      processDefinitionLoading,
       form: {getFieldDecorator}
     } = this.props;
 
@@ -171,6 +173,7 @@ export default class ProcessDefinition extends React.Component {
           />
         </div>
         <Table
+          loading={processDefinitionLoading}
           columns={columns}
           dataSource={processDefinitionList}
         />

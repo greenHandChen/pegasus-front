@@ -31,7 +31,6 @@ export default class ProcessDefinition extends React.Component {
   render() {
     const {
       processDefinitionList,
-      form: {getFieldDecorator}
     } = this.props;
 
 

@@ -3,7 +3,11 @@
  * @Description: 全局配置
  * @Data 2019/8/28
  */
+export const APP_NAME = 'Pegasus';
 export const API_HOST = 'http://localhost:8079';
+export const _CREATE = 'CREATE';// 创建
+export const _UPDATE = 'UPDATE';// 更新
+export const _DELETE = 'DELETE';// 删除
 
 /**
  * @Author: enHui.Chen

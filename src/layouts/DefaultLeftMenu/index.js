@@ -32,15 +32,15 @@ export default class DefaultLeftMenu extends React.Component {
     if (!routerData || typeof routerData === 'undefined') {
       return;
     }
-    return routerData.map((router, index) => {
-      if (router.isLeaf) {
+    return routerData.map((router) => {
+      if (router.isLeaf && router.isActive) {
         return (
           <li key={router.id} className={''}>
             <Link to={router.path} onClick={() => this.onClickMenu(router)}>
               <i className={router.leftClass}></i>{router.name}</Link>
           </li>
         );
-      } else {
+      } else if (router.isActive) {
         return (
           <li key={router.id} className={'treeview'}>
             <a onClick={this.handleClick}>
@@ -55,6 +55,7 @@ export default class DefaultLeftMenu extends React.Component {
           </li>
         );
       }
+      return null;
     })
   }
 
@@ -72,7 +73,7 @@ export default class DefaultLeftMenu extends React.Component {
             </div>
             <div className="pull-left info">
               <p>{currentUser.fullName}</p>
-              <a onClick={this.handleClick}><i className="fa fa-circle text-success"></i> {currentUser.status}</a>
+              <a onClick={this.handleClick}><i className="fa fa-circle text-success"></i> {currentUser.isActive?'已激活':'未激活'}</a>
             </div>
           </div>
           {/*搜索框*/}

@@ -1,5 +1,4 @@
-import {initMenuByRoleId} from "../services/authorize/menuService";
-import {initMenuAll} from "../services/authorize/userService";
+import {initMenuByRoleId} from "../services/platform/menuService";
 import {generateRouterData, getTiledRouterData} from '../utils/router'
 import {deepCopy} from '../utils/util'
 

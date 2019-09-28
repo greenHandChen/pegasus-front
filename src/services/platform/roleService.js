@@ -1,0 +1,35 @@
+import {request} from "../../utils/request";
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 初始化角色列表
+ * @Data 2019/9/27
+ */
+export async function findRoleAll(params) {
+  return request("/v1/role/findRoleAll", {
+    method: 'GET'
+  })
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 初始化角色列表
+ * @Data 2019/9/27
+ */
+export async function findRoleAllExcludeAdmin(params) {
+  return request("/v1/role/findRoleAll/excludeAdmin", {
+    method: 'GET'
+  })
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 批量权限分配
+ * @Data 2019/9/26
+ */
+export async function roleMenuBatchDispatch(params) {
+  return request(`/v1/role/roleMenu/batchDispatch/${params.roleId}`, {
+    method: 'POST',
+    body: params.menus
+  })
+}

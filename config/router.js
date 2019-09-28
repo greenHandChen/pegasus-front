@@ -37,6 +37,13 @@ module.exports = [
       'platform/menu'
     ],
     component: 'platform/Menu'
+  },
+  {
+    path: '/platform/roleManagement',
+    models: [
+      'platform/role'
+    ],
+    component: 'platform/RoleManagement'
   }
   /** 平台功能路由 end */
 
