@@ -71,3 +71,15 @@ export async function findTiledMenuByRoleId(params) {
     query: params
   })
 }
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 根据菜单名称模糊查询
+ * @Data 2019/9/26
+ */
+export async function findMenuByMenuName(params) {
+  return request("/v1/menu/findMenuByMenuName", {
+    method: 'GET',
+    query: params
+  })
+}

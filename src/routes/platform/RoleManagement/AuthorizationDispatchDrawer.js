@@ -1,5 +1,5 @@
 import React from "react";
-import {Input} from "antd";
+import {Button, Input} from "antd";
 import {_CREATE, _DELETE} from '../../../../config/config'
 import Drawer from '../../../components/Drawer'
 import Table from '../../../components/Table'
@@ -84,10 +84,9 @@ export default class AuthorizationDispatchDrawer extends React.Component {
 
   handleSearch = (val) => {
     this.props.dispatch({
-      type: 'role/roleMenuBatchDispatch',
+      type: 'role/findMenuByMenuName',
       payload: {
-        roleId: id,
-        menus: selectedRows
+        name: val
       }
     })
   }
@@ -177,6 +176,33 @@ export default class AuthorizationDispatchDrawer extends React.Component {
     });
   }
 
+  /**
+   * @Author: enHui.Chen
+   * @Description: 展开行
+   * @Data 2019/9/29
+   */
+  handleExpanded = () => {
+    const collapsedDivs = document.getElementsByClassName('ant-table-row-collapsed');
+    if (!collapsedDivs || typeof collapsedDivs === 'undefined') {
+      return;
+    }
+    for (let i = 0; i < collapsedDivs.length; i++) {
+      collapsedDivs[i].click();
+    }
+  }
+
+  /**
+   * @Author: enHui.Chen
+   * @Description: 合并行
+   * @Data 2019/9/29
+   */
+  handleCollapsed = () => {
+    const expandedDivs = document.getElementsByClassName('ant-table-row-expanded');
+    for (let i = 0; i < expandedDivs.length; i++) {
+      expandedDivs[i].click();
+    }
+  }
+
   render() {
     const {
       menuTree,
@@ -201,6 +227,8 @@ export default class AuthorizationDispatchDrawer extends React.Component {
           onSearch={val => this.handleSearch(val)}
           style={{width: 180, marginBottom: 30}}
         />
+        <Button style={{marginLeft: '10px'}} onClick={this.handleExpanded}>展开</Button>
+        <Button style={{marginLeft: '10px'}} onClick={this.handleCollapsed}>合并</Button>
         <Table
           rowSelection={rowSelection}
           loading={tiledMenuListLoading}

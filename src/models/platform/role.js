@@ -1,5 +1,5 @@
 import {findRoleAllExcludeAdmin, roleMenuBatchDispatch} from '../../services/platform/roleService';
-import {findMenuAll, findTiledMenuByRoleId} from "../../services/platform/menuService";
+import {findMenuAll, findMenuByMenuName, findTiledMenuByRoleId} from "../../services/platform/menuService";
 
 export default {
   namespace: 'role',
@@ -47,6 +47,15 @@ export default {
         type: 'findTiledMenuByRoleId',
         payload: {
           roleId: payload.roleId
+        }
+      });
+    },
+    * findMenuByMenuName({payload}, {call, put}) {
+      const menuTree = yield call(findMenuByMenuName, payload);
+      yield put({
+        type: 'updateState',
+        payload: {
+          menuTree
         }
       });
     }

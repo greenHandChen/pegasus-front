@@ -188,17 +188,6 @@ export default class Menu extends React.Component {
         ]
     }
 
-    const formItemLayout = {
-      labelCol: {
-        xs: {span: 24},
-        sm: {span: 6},
-      },
-      wrapperCol: {
-        xs: {span: 24},
-        sm: {span: 14},
-      },
-    };
-
     let prefixCode = null;
     const formMenuType = getFieldValue('type');
     if (_CREATE === currentRow._status) {
@@ -218,6 +207,17 @@ export default class Menu extends React.Component {
               showArrow={false}
               disabled
       />);
+
+    const formItemLayout = {
+      labelCol: {
+        xs: {span: 24},
+        sm: {span: 6},
+      },
+      wrapperCol: {
+        xs: {span: 24},
+        sm: {span: 14},
+      },
+    };
 
     const drawerProps = {
       title: '新建菜单',
