@@ -1,4 +1,10 @@
-import {findRoleAllExcludeAdmin, roleMenuBatchDispatch} from '../../services/platform/roleService';
+import {
+  findRoleAll,
+  roleCopyOrExtend,
+  roleCreateOrEdit,
+  roleMenuBatchDispatch,
+  roleActive
+} from '../../services/platform/roleService';
 import {findMenuAll, findMenuByMenuName, findTiledMenuByRoleId} from "../../services/platform/menuService";
 
 export default {
@@ -12,7 +18,7 @@ export default {
 
   effects: {
     * findRoleAll({payload}, {call, put}) {
-      const roleList = yield call(findRoleAllExcludeAdmin, payload);
+      const roleList = yield call(findRoleAll, payload);
       if (roleList) {
         yield put({
           type: 'updateState',
@@ -57,6 +63,25 @@ export default {
         payload: {
           menuTree
         }
+      });
+    },
+    * roleCreateOrEdit({payload}, {call, put}) {
+      yield call(roleCreateOrEdit, payload);
+      yield put({
+        type: 'findRoleAll'
+      });
+    }
+    ,
+    * roleCopyOrExtend({payload}, {call, put}) {
+      yield call(roleCopyOrExtend, payload);
+      yield put({
+        type: 'findRoleAll'
+      });
+    },
+    * roleActive({payload}, {call, put}) {
+      yield call(roleActive, payload);
+      yield put({
+        type: 'findRoleAll'
       });
     }
   },

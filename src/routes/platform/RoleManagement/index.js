@@ -3,7 +3,7 @@ import {connect} from 'dva';
 import {Form} from 'antd';
 import Table from '../../../components/Table';
 import AuthorizationDispatchDrawer from "./AuthorizationDispatchDrawer";
-import RoleDrawer from "./RoleDrawer";
+import RoleModal from "./RoleModal";
 
 @Form.create({name: 'roleForm'})
 @connect(({loading, role}) => ({
@@ -31,31 +31,39 @@ export default class RoleManagement extends React.Component {
     this.authorizationDispatchDrawer = drawer;
   }
 
-  onRoleDrawer = drawer => {
-    this.roleDrawer = drawer;
+  onRoleModal = modal => {
+    this.roleModal = modal;
   }
 
   handleCreateRole = row => {
-    this.roleDrawer.handleOpenDrawer({
-      title: '创建角色'
+    this.roleModal.handleOpenModal({
+      title: '创建角色',
+      action: 'CREATE',
+      ...row
     });
   }
 
   handleUpdateRole = row => {
-    this.roleDrawer.handleOpenDrawer({
-      title: '编辑角色'
+    this.roleModal.handleOpenModal({
+      title: '编辑角色',
+      action: 'EDIT',
+      ...row
     });
   }
 
   handleCopyRole = row => {
-    this.roleDrawer.handleOpenDrawer({
-      title: '复制角色'
+    this.roleModal.handleOpenModal({
+      title: '复制角色',
+      action: 'COPY',
+      ...row
     });
   }
 
   handleExtendRole = row => {
-    this.roleDrawer.handleOpenDrawer({
-      title: '继承角色'
+    this.roleModal.handleOpenModal({
+      title: '继承角色',
+      action: 'EXTEND',
+      ...row
     });
   }
 
@@ -67,14 +75,17 @@ export default class RoleManagement extends React.Component {
   }
 
   handleActiveRole = row => {
+    const {dispatch} = this.props;
+    dispatch({
+      type: 'role/roleActive',
+      payload: row
+    });
   }
 
   render() {
     const {
-      dispatch,
       roleList,
-      roleListLoading,
-      form: {getFieldDecorator}
+      roleListLoading
     } = this.props;
 
 
@@ -118,10 +129,12 @@ export default class RoleManagement extends React.Component {
         fixed: 'right',
         render: (text, row) => {
           return (<div>
-            <a style={{marginLeft: '15'}} onClick={() => this.handleCreateRole(row)} target={'_blank'}>
-              创建
-            </a>
-            {row.roleCode === 'ROLE_SUB_ADMIN' ? null :
+            {row.roleCode === 'ROLE_ADMIN' ?
+              <a style={{marginLeft: '15px'}} onClick={() => this.handleCreateRole(row)} target={'_blank'}>
+                创建
+              </a> : null
+            }
+            {row.roleCode === 'ROLE_ADMIN' ? null :
               <a style={{marginLeft: '15px'}} onClick={() => this.handleUpdateRole(row)} target={'_blank'}>
                 编辑
               </a>
@@ -135,7 +148,7 @@ export default class RoleManagement extends React.Component {
             <a style={{marginLeft: '15px'}} onClick={() => this.handleAuthorizationDispatch(row)} target={'_blank'}>
               权限分配
             </a>
-            {row.roleCode === 'ROLE_SUB_ADMIN' ? null :
+            {row.roleCode === 'ROLE_ADMIN' ? null :
               <a style={{marginLeft: '15px'}} onClick={() => this.handleActiveRole(row)} target={'_blank'}>
                 {!row.isActive ? '启用' : '禁用'}
               </a>
@@ -155,8 +168,8 @@ export default class RoleManagement extends React.Component {
         <AuthorizationDispatchDrawer
           onAuthorizationDispatchDrawer={(drawer) => this.onAuthorizationDispatchDrawer(drawer)}
         />
-        <RoleDrawer
-          onRoleDrawer={(drawer) => this.onRoleDrawer(drawer)}
+        <RoleModal
+          onRoleModal={(modal) => this.onRoleModal(modal)}
         />
       </React.Fragment>
     )

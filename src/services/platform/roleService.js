@@ -33,3 +33,39 @@ export async function roleMenuBatchDispatch(params) {
     body: params.menus
   })
 }
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 创建/编辑角色
+ * @Data 2019/9/26
+ */
+export async function roleCreateOrEdit(params) {
+  return request(`/v1/role/roleCreateOrEdit`, {
+    method: 'POST',
+    body: params
+  })
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 复制/继承角色
+ * @Data 2019/9/26
+ */
+export async function roleCopyOrExtend(params) {
+  return request(`/v1/role/roleCopyOrExtend`, {
+    method: 'POST',
+    body: params
+  })
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 启用/禁用角色
+ * @Data 2019/9/26
+ */
+export async function roleActive(params) {
+  return request(`/v1/role/roleActive`, {
+    method: 'PUT',
+    body: params
+  })
+}

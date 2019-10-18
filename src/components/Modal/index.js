@@ -6,6 +6,7 @@ export default class WrapperModal extends React.Component {
     super(props);
     this.props.onRefModal(this);
     this.state = {
+      title: null,
       okText: '确定',
       cancelText: '取消',
       keyboard: true,// 支持ESC关闭
@@ -15,20 +16,11 @@ export default class WrapperModal extends React.Component {
     }
   }
 
-  onOk = () => {
-    const {onOk} = this.props;
-
-    if (typeof onOk === 'function') {
-      onOk();
-    }
-
-    this.handleCloseModal();
-  }
-
-  handleOpenModal = () => {
+  handleOpenModal = (options) => {
     this.setState({
       ...this.state,
-      visible: true
+      visible: true,
+      ...options
     });
   }
 
@@ -37,6 +29,38 @@ export default class WrapperModal extends React.Component {
       ...this.state,
       visible: false
     });
+  }
+
+  /**
+   * @Author: enHui.Chen
+   * @Description: 带回调的关闭
+   * @Data 2019/9/30
+   */
+  handleCloseCallBack = () => {
+    const {onCancel} = this.props;
+
+    if (typeof onCancel === 'function') {
+      onCancel();
+    }
+
+    this.handleCloseModal();
+  }
+
+  /**
+   * @Author: enHui.Chen
+   * @Description: 带回调的确认,回调返回true时,不关闭弹框
+   * @Data 2019/9/30
+   */
+  handleOKCallBack = () => {
+    const {onOk} = this.props;
+
+    if (typeof onOk === 'function') {
+      if (onOk()) {
+        return;
+      }
+    }
+
+    this.handleCloseModal();
   }
 
   render() {
@@ -51,11 +75,11 @@ export default class WrapperModal extends React.Component {
       <Modal
         {...this.state}
         centered
-        title={title}
+        title={title ? title : this.state.title}
         zIndex={zIndex}
         width={width}
-        onCancel={this.handleCloseModal}
-        onOk={this.onOk}
+        onCancel={this.handleCloseCallBack}
+        onOk={this.handleOKCallBack}
       >
         {modalContent}
       </Modal>

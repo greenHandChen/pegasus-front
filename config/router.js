@@ -2,29 +2,22 @@ module.exports = [
   /** 工作流路由 start */
   {
     path: '/activiti/processDefinition',
-    models: [
-      'activiti/processDefinition'
-    ],
+    models: ['activiti/processDefinition'],
     component: 'activiti/ProcessDefinition'
   },
   {
     path: '/activiti/processTest',
-    models: [
-      'activiti/processTest'
-    ],
+    models: ['activiti/processTest'],
     component: 'activiti/ProcessTest'
   },
   {
     path: '/activiti/processTodoTask',
-    models: [
-      'activiti/processTodoTask'
-    ],
+    models: ['activiti/processTodoTask'],
     component: 'activiti/ProcessTodoTask'
   },
   {
     path: '/activiti/todoTask',
-    models: [
-      // TODO
+    models: [// TODO
       'activiti/processDefinition'
     ],
     component: 'activiti/TodoTask'
@@ -33,18 +26,18 @@ module.exports = [
   /** 平台功能路由 start */
   {
     path: '/platform/menuTree',
-    models: [
-      'platform/menu'
-    ],
+    models: ['platform/menu'],
     component: 'platform/Menu'
   },
   {
     path: '/platform/roleManagement',
-    models: [
-      'platform/role'
-    ],
+    models: ['platform/role'],
     component: 'platform/RoleManagement'
+  },
+  {
+    path: '/platform/accountManagement',
+    models: ['platform/account', 'platform/role'],
+    component: 'platform/AccountManagement'
   }
   /** 平台功能路由 end */
-
 ]

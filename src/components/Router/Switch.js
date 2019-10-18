@@ -18,7 +18,6 @@ export default class WrapperSwitch extends Switch {
     } = nextProps;
     // tab标签切换时,只渲染对应标签内容
     return activeKey === tabKey /*&& activePath.startsWith(path)*/;
-    return true;
   }
 
 }

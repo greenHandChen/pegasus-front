@@ -165,7 +165,7 @@ export default class ProcessDefinition extends React.Component {
     return (
       <React.Fragment>
         <div style={{margin: '0 10px 20px 10px'}}>
-          <Button onClick={() => this.onRefModal.handleOpenModal()}>创建流程</Button>
+          <Button type="primary" onClick={() => this.onRefModal.handleOpenModal()}>创建流程</Button>
           <Input.Search
             placeholder={'请输入流程名称'}
             onSearch={value => this.handleGetProcessDefinitionList(value)}

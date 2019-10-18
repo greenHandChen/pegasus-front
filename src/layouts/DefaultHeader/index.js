@@ -33,7 +33,7 @@ export default class DefaultHeader extends React.Component {
       <header className="main-header">
         {/*左上角标题*/}
         <a onClick={this.handleClick} className="logo">
-          <span className="logo-lg"><b>Mr.</b>Chen</span>
+          <span className="logo-lg"><b>Pe</b>gasus</span>
         </a>
         {/*Header Navbar: style can be found in header.less*/}
         <nav className="navbar navbar-static-top">

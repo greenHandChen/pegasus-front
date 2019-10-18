@@ -21,7 +21,7 @@ export default class DefaultFooter extends React.Component {
         <div className="pull-right hidden-xs">
           <b>Version</b> 0.0.1
         </div>
-        <strong>Copyright &copy; 2014-2019 <a onClick={this.handleClick}>Mr.Chen</a>.</strong> All rights
+        <strong>Copyright &copy; 2014-2019 <a onClick={this.handleClick}>Pegasus</a>.</strong> All rights
         reserved.
       </footer>
     );
