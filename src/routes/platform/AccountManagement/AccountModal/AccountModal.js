@@ -9,7 +9,8 @@ import {connect} from 'dva';
 import DispatchRoleModal from "./DispatchRoleModal";
 
 @Form.create({name: 'accountForm'})
-@connect(({loading}) => ({
+@connect(({loading, account}) => ({
+  userRoleList: account.userRoleList,
   userRoleListLoading: loading.effects['account/findRoleListByUserId']
 }))
 export default class AccountModal extends React.Component {
@@ -19,8 +20,7 @@ export default class AccountModal extends React.Component {
     this.state = {
       id: null,// 主键
       title: null,// 标题
-      switchValue: null,// 是否启用
-      userRoleList: []// 帐号的角色信息
+      switchValue: null// 是否启用
     };
   }
 
@@ -38,14 +38,6 @@ export default class AccountModal extends React.Component {
         type: 'account/findRoleListByUserId',
         payload: {
           userId: options.id
-        }
-      }).then(res => {
-        if (res) {
-          this.setState({
-            ...this.state,
-            ...options,
-            userRoleList: res
-          });
         }
       });
 
@@ -153,10 +145,10 @@ export default class AccountModal extends React.Component {
   render() {
     const {
       id,
-      userRoleList,
       accountForm = {}
     } = this.state;
     const {
+      userRoleList,
       userRoleListLoading,
       form: {getFieldDecorator}
     } = this.props;
@@ -367,6 +359,9 @@ export default class AccountModal extends React.Component {
           columns={tableColumns}
           dataSource={userRoleList}
           loading={userRoleListLoading}
+          pagination={{
+            defaultPageSize: 3
+          }}
         />
         <DispatchRoleModal
           onDispatchRoleModal={this.onDispatchRoleModal}

@@ -36,6 +36,7 @@ export default class DispatchRoleModal extends React.Component {
 
   handleCancelModal = () => {
     this.setState({
+      id: null,
       selectedRowKeys: []
     });
   }
@@ -54,9 +55,11 @@ export default class DispatchRoleModal extends React.Component {
       type: 'account/dispatchRole',
       payload: {
         userId: id,
-        userRoles: selectedRowKeys
+        roleIds: selectedRowKeys
       }
     });
+
+    this.handleCancelModal();
   }
 
   handleSelectChange = selectedRowKeys => {

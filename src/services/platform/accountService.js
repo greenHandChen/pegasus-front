@@ -55,6 +55,6 @@ export async function findRoleListByUserId(params) {
 export async function dispatchRole(params) {
   return request(`/v1/user/dispatchRole/${params.userId}`, {
     method: 'POST',
-    body: params
+    body: params.roleIds
   })
 }
