@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'dva';
-import {Button, Form, Select} from 'antd';
+import {Button, Form, Input, Select} from 'antd';
 
 @Form.create({name: 'processTest'})
 @connect(({processTest}) => ({
@@ -123,6 +123,14 @@ export default class ProcessTest extends React.Component {
                 message: '请选择流程测试发起人'
               }]
             })(processTestEmployee)}
+          </Form.Item>
+          <Form.Item label={'金额'}>
+            {getFieldDecorator('amount', {
+              rules: [{
+                required: true,
+                message: '请填写金额'
+              }]
+            })(<Input style={{width: '300px'}}/>)}
           </Form.Item>
           <Form.Item
             wrapperCol={{

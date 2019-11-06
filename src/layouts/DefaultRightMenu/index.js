@@ -18,7 +18,7 @@ export default class DefaultRightMenu extends React.Component {
 
   render() {
     return (
-      <aside className="control-sidebar control-sidebar-dark" style={{display: "none"}}>
+      <aside className="control-sidebar control-sidebar-dark" style={{display: "none", zIndex: 810}}>
         {/*Create the tabs*/}
         <ul className="nav nav-tabs nav-justified control-sidebar-tabs">
           <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i className="fa fa-home"></i></a></li>
@@ -150,7 +150,7 @@ export default class DefaultRightMenu extends React.Component {
               <div className="form-group">
                 <label className="control-sidebar-subheading">
                   Allow mail redirect
-                  <input type="checkbox" className="pull-right"  defaultChecked={true}/>
+                  <input type="checkbox" className="pull-right" defaultChecked={true}/>
                 </label>
 
                 <p>
@@ -161,7 +161,7 @@ export default class DefaultRightMenu extends React.Component {
               <div className="form-group">
                 <label className="control-sidebar-subheading">
                   Expose author name in posts
-                  <input type="checkbox" className="pull-right"  defaultChecked={true}/>
+                  <input type="checkbox" className="pull-right" defaultChecked={true}/>
                 </label>
 
                 <p>
@@ -174,7 +174,7 @@ export default class DefaultRightMenu extends React.Component {
               <div className="form-group">
                 <label className="control-sidebar-subheading">
                   Show me as online
-                  <input type="checkbox" className="pull-right"  defaultChecked={true}/>
+                  <input type="checkbox" className="pull-right" defaultChecked={true}/>
                 </label>
               </div>
 

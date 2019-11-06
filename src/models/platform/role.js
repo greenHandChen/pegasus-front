@@ -1,9 +1,10 @@
 import {
   findRoleAll,
+  roleActive,
   roleCopyOrExtend,
   roleCreateOrEdit,
   roleMenuBatchDispatch,
-  roleActive
+  findAccountAllocatableRole
 } from '../../services/platform/roleService';
 import {findMenuAll, findMenuByMenuName, findTiledMenuByRoleId} from "../../services/platform/menuService";
 
@@ -13,7 +14,8 @@ export default {
   state: {
     roleList: [],
     menuTree: [],
-    tiledMenuList: []
+    tiledMenuList: [],
+    allocatableRoleList: []
   },
 
   effects: {
@@ -83,6 +85,16 @@ export default {
       yield put({
         type: 'findRoleAll'
       });
+    },
+    * findAccountAllocatableRole({payload}, {call, put}){
+      const allocatableRoleList = yield call(findAccountAllocatableRole, payload);
+      if (allocatableRoleList) {
+        yield put({
+          type: 'updateState',
+          payload: {allocatableRoleList}
+        });
+      }
+      return allocatableRoleList;
     }
   },
 

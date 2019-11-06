@@ -1,10 +1,9 @@
 import React from "react";
 import Modal from '../../../../components/Modal';
+import {stringIsEmpty} from '../../../../utils/util';
 import Table from '../../../../components/Table';
 import Switch from '../../../../components/Switch';
-import DatePicker from '../../../../components/DatePicker';
-import {Button, Col, Form, Input, Row, Select,} from 'antd';
-import moment from 'moment';
+import {Button, Col, Form, Input, Row,} from 'antd';
 import {connect} from 'dva';
 import DispatchRoleModal from "./DispatchRoleModal";
 
@@ -20,7 +19,8 @@ export default class AccountModal extends React.Component {
     this.state = {
       id: null,// 主键
       title: null,// 标题
-      switchValue: null// 是否启用
+      switchValue: null,// 是否启用
+      selectedRowKeys: []
     };
   }
 
@@ -28,7 +28,11 @@ export default class AccountModal extends React.Component {
     this.onRefModal = modal;
   }
 
-
+  /**
+   * @Author: enHui.Chen
+   * @Description: 打开MODAL框的回调
+   * @Data 2019/10/21
+   */
   handleOpenModal = options => {
     this.onRefModal.handleOpenModal();
     if (options && options.id) {
@@ -49,7 +53,6 @@ export default class AccountModal extends React.Component {
       }).then(res => {
         if (res) {
           this.setState({
-            ...this.state,
             ...options,
             accountForm: res
           });
@@ -58,19 +61,9 @@ export default class AccountModal extends React.Component {
       return;
     }
     this.setState({
-      ...this.state,
       ...options
     });
 
-  }
-
-  handleCancelModal = () => {
-    this.setState({
-      id: null,
-      switchValue: null,
-      accountForm: {},
-      userRoleList: []
-    });
   }
 
   /**
@@ -82,10 +75,43 @@ export default class AccountModal extends React.Component {
     this.dispatchRoleModal = modal;
   }
 
+  /**
+   * @Author: enHui.Chen
+   * @Description: 打开分配角色的MODAL
+   * @Data 2019/10/21
+   */
   handleOpenDispatchRoleModal = () => {
+    const id = this.state.id;
+    if (!id) {
+      // TODO
+      return;
+    }
     this.dispatchRoleModal.handleOpenModal({
-      id: this.state.id
+      id
     });
+  }
+
+  /**
+   * @Author: enHui.Chen
+   * @Description: 删除角色
+   * @Data 2019/10/21
+   */
+  handleDeleteDispatchRole = () => {
+    const {
+      id,
+      selectedRowKeys
+    } = this.state;
+    this.props.dispatch({
+      type: 'account/deleteDispatchRole',
+      payload: {
+        userId: id,
+        roleIds: selectedRowKeys
+      }
+    });
+    this.setState({
+      ...this.state,
+      selectedRowKeys: []
+    })
   }
 
   /**
@@ -117,8 +143,18 @@ export default class AccountModal extends React.Component {
     callback();
   }
 
+  /**
+   * @Author: enHui.Chen
+   * @Description: 确认保存
+   * @Data 2019/10/21
+   */
   handleConfirmModal = () => {
     let vRst;
+    const {
+      id,
+      accountForm,
+      switchValue
+    } = this.state;
     const {
       form,
       dispatch
@@ -126,25 +162,63 @@ export default class AccountModal extends React.Component {
     form.validateFieldsAndScroll(rst => {
       if (!(vRst = rst)) {
         const roleForm = form.getFieldsValue();
-        roleForm.id = this.state.id;
-        roleForm.isActive = this.state.switchValue;
+        roleForm.id = id;
+        roleForm.isActive = switchValue;
+        if (stringIsEmpty(roleForm.isActive)) {
+          roleForm.isActive = !stringIsEmpty(id) ? accountForm.isActive : false;
+        }
         dispatch({
           type: 'account/createOrUpdateAccount',
           payload: roleForm
         });
+        this.handleCancelModal();
       }
     })
     return vRst;
   }
 
+  /**
+   * @Author: enHui.Chen
+   * @Description: 取消
+   * @Data 2019/10/21
+   */
+  handleCancelModal = () => {
+    this.setState({
+      id: null,
+      switchValue: null,
+      accountForm: {},
+      userRoleList: [],
+      selectedRowKeys: []
+    });
+  }
+
+  /**
+   * @Author: enHui.Chen
+   * @Description: 获选是否激活的值
+   * @Data 2019/10/21
+   */
   getSwitchValue = (value) => {
     // eslint-disable-next-line react/no-direct-mutation-state
     this.state.switchValue = value;
   }
 
+  /**
+   * @Author: enHui.Chen
+   * @Description: 处理复选框
+   * @Data 2019/10/21
+   */
+  handleSelectChange = selectedRowKeys => {
+    this.setState({
+      ...this.state,
+      selectedRowKeys
+    });
+  };
+
   render() {
     const {
       id,
+      selectedRowKeys,
+      switchValue,
       accountForm = {}
     } = this.state;
     const {
@@ -157,6 +231,11 @@ export default class AccountModal extends React.Component {
       labelCol: {span: 6},
       wrapperCol: {span: 16}
     }
+
+    const rowSelection = {
+      selectedRowKeys,
+      onChange: this.handleSelectChange,
+    };
 
 
     const tableColumns = [
@@ -192,6 +271,7 @@ export default class AccountModal extends React.Component {
       }
     ]
 
+    console.log('accountForm.isActive ', accountForm.isActive, 'state.switchValue', this.state.switchValue);
     const content = (
       <React.Fragment>
         <Form className='ant-advanced-search-form' {...formLayout}>
@@ -209,14 +289,14 @@ export default class AccountModal extends React.Component {
               </Form.Item>
             </Col>
             <Col span={11}>
-              <Form.Item label="名称">
-                {getFieldDecorator('realName', {
+              <Form.Item label="昵称">
+                {getFieldDecorator('nickName', {
                   rules: [
                     {
                       required: true
                     }
                   ],
-                  initialValue: id !== null ? accountForm.realName : null
+                  initialValue: id !== null ? accountForm.nickName : null
                 })(<Input/>)}
               </Form.Item>
             </Col>
@@ -255,37 +335,6 @@ export default class AccountModal extends React.Component {
           }
           <Row>
             <Col span={11}>
-              <Form.Item label="昵称">
-                {getFieldDecorator('nickName', {
-                  rules: [
-                    {
-                      required: true
-                    }
-                  ],
-                  initialValue: id !== null ? accountForm.nickName : null
-                })(<Input/>)}
-              </Form.Item>
-            </Col>
-            <Col span={11}>
-              <Form.Item label="性别">
-                {getFieldDecorator('sex', {
-                  rules: [
-                    {
-                      required: true
-                    }
-                  ],
-                  initialValue: id !== null ? accountForm.sex : null
-                })(
-                  <Select>
-                    <Select.Option value={'Male'}>男</Select.Option>
-                    <Select.Option value={'FeMale'}>女</Select.Option>
-                  </Select>
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={11}>
               <Form.Item label="手机号">
                 {getFieldDecorator('phone', {
                   rules: [
@@ -314,7 +363,7 @@ export default class AccountModal extends React.Component {
               </Form.Item>
             </Col>
           </Row>
-          <Row>
+          {/*<Row>
             <Col span={11}>
               <Form.Item label="出生日期">
                 {getFieldDecorator('birthday', {
@@ -334,21 +383,21 @@ export default class AccountModal extends React.Component {
                 })(<Input/>)}
               </Form.Item>
             </Col>
-          </Row>
+          </Row>*/}
           <Row>
             <Col span={11}>
               <Form.Item label="激活">
                 {getFieldDecorator('isActive')(
                   <Switch
                     getSwitchValue={this.getSwitchValue}
-                    defaultChecked={accountForm.isActive !== null && id !== null ? accountForm.isActive : false}
+                    defaultChecked={switchValue !== null ? switchValue : (accountForm.isActive !== null && id !== null ? accountForm.isActive : false)}
                   />
                 )}
               </Form.Item>
             </Col>
             <Col span={11}>
               <Form.Item wrapperCol={{offset: 10}}>
-                <Button onClick={() => this.handleCreateAccount()}>删除角色</Button>
+                <Button onClick={() => this.handleDeleteDispatchRole()}>删除角色</Button>
                 <Button type="primary" style={{marginLeft: '25px'}}
                         onClick={() => this.handleOpenDispatchRoleModal()}>分配角色</Button>
               </Form.Item>
@@ -357,8 +406,9 @@ export default class AccountModal extends React.Component {
         </Form>
         <Table
           columns={tableColumns}
-          dataSource={userRoleList}
+          dataSource={id ? userRoleList : null}
           loading={userRoleListLoading}
+          rowSelection={rowSelection}
           pagination={{
             defaultPageSize: 3
           }}

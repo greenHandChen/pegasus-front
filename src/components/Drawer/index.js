@@ -8,7 +8,7 @@ export default class WrapperDrawer extends React.Component {
     this.props.onRefDrawer(this);
     this.state = {
       defaultWidth: '500px',
-      defaultZIndex: 1050,
+      // defaultZIndex: 1050,
       visible: false,
       defaultClosable: false,
       defaultDestroyOnClose: true// 关闭Drawer时销毁子元素
@@ -16,10 +16,16 @@ export default class WrapperDrawer extends React.Component {
   }
 
   onOk = () => {
-    const {onOk} = this.props;
+    const {onOk, onOkNoClose} = this.props;
 
     if (typeof onOk === 'function') {
-      onOk();
+      if (onOk()) {
+        return;
+      }
+    }
+    if (typeof onOkNoClose === 'function') {
+      onOkNoClose();
+      return;
     }
 
     this.handleCloseDrawer();

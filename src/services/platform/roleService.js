@@ -69,3 +69,14 @@ export async function roleActive(params) {
     body: params
   })
 }
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 获取账户可分配角色
+ * @Data 2019/9/26
+ */
+export async function findAccountAllocatableRole(params) {
+  return request(`/v1/role/findAccountAllocatableRole/${params.userId}`, {
+    method: 'GET'
+  })
+}

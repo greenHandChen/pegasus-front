@@ -3,6 +3,7 @@ import {connect} from 'dva';
 import {Button, Form, Input} from 'antd';
 import Table from '../../../components/Table';
 import AccountModal from './AccountModal/AccountModal';
+import PasswordDrawer from './PasswordDrawer';
 
 @Form.create({name: 'accountForm'})
 @connect(({loading, account}) => ({
@@ -48,7 +49,7 @@ export default class RoleManagement extends React.Component {
   }
 
   handleModifyPassword = row => {
-    this.passwordDrawer.handleOpenModal({
+    this.passwordDrawer.handleOpenDrawer({
       title: '修改密码',
       ...row
     });
@@ -68,9 +69,9 @@ export default class RoleManagement extends React.Component {
         key: 'username',
       },
       {
-        title: '名称',
-        dataIndex: 'realName',
-        key: 'realName',
+        title: '昵称',
+        dataIndex: 'nickName',
+        key: 'nickName',
         width: 300
       },
       {
@@ -127,9 +128,9 @@ export default class RoleManagement extends React.Component {
           columns={columns}
           dataSource={accountList}
         />
-        {/*<PasswordDrawer*/}
-        {/*  onPasswordDrawer={(drawer) => this.onPasswordDrawer(drawer)}*/}
-        {/*/>*/}
+        <PasswordDrawer
+          onPasswordDrawer={(drawer) => this.onPasswordDrawer(drawer)}
+        />
         <AccountModal
           onAccountModal={(modal) => this.onAccountModal(modal)}
         />

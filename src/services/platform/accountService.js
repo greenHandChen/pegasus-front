@@ -58,3 +58,27 @@ export async function dispatchRole(params) {
     body: params.roleIds
   })
 }
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 帐号角色删除
+ * @Data 2019/9/27
+ */
+export async function deleteDispatchRole(params) {
+  return request(`/v1/user/deleteDispatchRole/${params.userId}`, {
+    method: 'DELETE',
+    body: params.roleIds
+  })
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 界面-修改密码
+ * @Data 2019/9/27
+ */
+export async function modifyPassword(params) {
+  return request(`/v1/user/modifyPassword`, {
+    method: 'PUT',
+    body: params
+  })
+}

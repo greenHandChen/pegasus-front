@@ -33,7 +33,7 @@ export default class ProcessDefinition extends React.Component {
       type: 'processTodoTask/completeTask',
       payload: {
         taskId,
-        outcome: 'approve'
+        outcome: 'APPROVED'
       }
     })
   }
@@ -43,7 +43,7 @@ export default class ProcessDefinition extends React.Component {
       type: 'processTodoTask/completeTask',
       payload: {
         taskId,
-        outcome: 'reject'
+        outcome: 'REJECTED'
       }
     })
   }
@@ -80,7 +80,7 @@ export default class ProcessDefinition extends React.Component {
         width: '10%'
       },
       {
-        title: '申请人',
+        title: '任务申请人',
         dataIndex: 'startUserName',
         width: '10%'
       },

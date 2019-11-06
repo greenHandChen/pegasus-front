@@ -59,7 +59,7 @@ export default class IndexPage extends React.Component {
         {/* 右侧菜单栏 */}
         <DefaultRightMenu/>
 
-        <div className="control-sidebar-bg"></div>
+        <div className="control-sidebar-bg" style={{zIndex: 800}}></div>
       </div>
     );
   }

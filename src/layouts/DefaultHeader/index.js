@@ -30,7 +30,7 @@ export default class DefaultHeader extends React.Component {
       currentUser
     } = this.props;
     return (
-      <header className="main-header">
+      <header className="main-header" style={{zIndex: 820}}>
         {/*左上角标题*/}
         <a onClick={this.handleClick} className="logo">
           <span className="logo-lg"><b>Pe</b>gasus</span>

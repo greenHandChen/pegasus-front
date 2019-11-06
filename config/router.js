@@ -16,6 +16,11 @@ module.exports = [
     component: 'activiti/ProcessTodoTask'
   },
   {
+    path: '/activiti/processMonitor',
+    models: ['activiti/processMonitor','platform/employee'],
+    component: 'activiti/ProcessMonitor'
+  },
+  {
     path: '/activiti/todoTask',
     models: [// TODO
       'activiti/processDefinition'

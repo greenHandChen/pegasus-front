@@ -67,3 +67,12 @@ export function removeStorage(key) {
 export function deepCopy(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 判断字符串是否为空
+ * @Data 2019/10/21
+ */
+export function stringIsEmpty(val) {
+  return val === '' || val === null || typeof val === 'undefined';
+}

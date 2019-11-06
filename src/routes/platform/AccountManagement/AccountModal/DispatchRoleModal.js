@@ -4,8 +4,8 @@ import Modal from '../../../../components/Modal';
 import {connect} from 'dva';
 
 @connect(({loading, role}) => ({
-  roleList: role.roleList,
-  roleListLoading: loading.effects['role/findRoleAll']
+  allocatableRoleList: role.allocatableRoleList,
+  allocatableRoleListLoading: loading.effects['role/findAccountAllocatableRole']
 }))
 export default class DispatchRoleModal extends React.Component {
   constructor(props) {
@@ -26,7 +26,10 @@ export default class DispatchRoleModal extends React.Component {
     const {dispatch} = this.props;
 
     dispatch({
-      type: 'role/findRoleAll'
+      type: 'role/findAccountAllocatableRole',
+      payload: {
+        userId: options.id
+      }
     });
 
     this.setState({
@@ -71,8 +74,8 @@ export default class DispatchRoleModal extends React.Component {
 
   render() {
     const {
-      roleList,
-      roleListLoading
+      allocatableRoleList,
+      allocatableRoleListLoading
     } = this.props;
 
     const {
@@ -121,8 +124,8 @@ export default class DispatchRoleModal extends React.Component {
       <React.Fragment>
         <Table
           columns={tableColumns}
-          dataSource={roleList}
-          loading={roleListLoading}
+          dataSource={allocatableRoleList}
+          loading={allocatableRoleListLoading}
           rowSelection={rowSelection}
           pagination={{
             defaultPageSize: 5

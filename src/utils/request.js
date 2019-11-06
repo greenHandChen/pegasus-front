@@ -1,4 +1,5 @@
 import fetch from "dva/fetch";
+import notification from "../components/Notification";
 import {ACCESS_TOKEN, API_HOST, AUTH_URL} from "../../config/config";
 import {filterNullValObj, generateUrl, getStorage} from "./util";
 
@@ -53,15 +54,14 @@ export function request(url, options) {
       if (res.status === 401) {
         window.open(AUTH_URL, '_self');
       }
-
       // no-content
       if (res.status === 204) {
         return {};
       }
-
-      if (res.status >= 200 && res.status < 300) {
-        return newOptions.responseType === 'text' ? res.text : res.json();
-      }
-
+      return newOptions.responseType === 'text' ? res.text : res.json();
+    }).catch(err => {
+      notification.error({
+        description: err
+      });
     });
 }
