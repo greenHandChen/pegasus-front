@@ -1,5 +1,8 @@
 import {
+  counterSignAddTask,
+  counterSignReduceTask,
   deliverTask,
+  findCounterSignAddOrReduceTask,
   findDeliverTask,
   findProcessInstanceMonitor,
   findProcessJumpNode,
@@ -7,7 +10,7 @@ import {
   jumpTask,
   suspendOrActiveTask
 } from '../../services/activiti/processMonitorService';
-import {response} from "../../utils/response";
+import {paginationUtil, response} from "../../utils/response";
 
 export default {
   namespace: 'processMonitor',
@@ -15,7 +18,9 @@ export default {
   state: {
     deliverTaskList: [],
     processNodeList: [],
-    processMonitorList: []
+    processMonitorList: [],
+    processMonitorPagination: {},
+    counterSignTaskList: []
   },
 
   effects: {
@@ -25,9 +30,11 @@ export default {
         yield put({
           type: 'updateState',
           payload: {
-            processMonitorList
+            processMonitorList: processMonitorList.content,
+            processMonitorPagination: paginationUtil(processMonitorList)
           }
-        });
+        })
+        ;
       }
       return processMonitorList;
     },
@@ -55,6 +62,18 @@ export default {
       }
       return deliverTaskList;
     },
+    * findCounterSignAddOrReduceTask({payload}, {call, put}) {
+      const counterSignTaskList = yield call(findCounterSignAddOrReduceTask, payload);
+      if (counterSignTaskList) {
+        yield put({
+          type: 'updateState',
+          payload: {
+            counterSignTaskList
+          }
+        });
+      }
+      return counterSignTaskList;
+    },
     * jumpTask({payload}, {call, put}) {
       response(yield call(jumpTask, payload));
       yield put({type: 'findProcessInstanceMonitor'});
@@ -76,7 +95,16 @@ export default {
         }
       });
       yield put({type: 'findProcessInstanceMonitor'});
-    }
+    },
+    * counterSignAddTask({payload}, {call, put}) {
+      response(yield call(counterSignAddTask, payload));
+      yield put({type: 'findProcessInstanceMonitor'});
+    },
+    * counterSignReduceTask({payload}, {call, put}) {
+      response(yield call(counterSignReduceTask, payload));
+      yield put({type: 'findProcessInstanceMonitor'});
+
+    },
   },
 
   reducers: {

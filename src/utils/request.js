@@ -11,6 +11,11 @@ const DEFAULT_OPTIONS = {
   }
 }
 
+/**
+ * @Author: enHui.Chen
+ * @Description: 初始化请求数据
+ * @Data 2019/11/8
+ */
 export function request(url, options) {
   let newOptions = {...DEFAULT_OPTIONS, ...options};
 
@@ -51,8 +56,9 @@ export function request(url, options) {
 
   return fetch(newUrl, newOptions)
     .then(res => {
+      const cacheLocation = encodeURIComponent(window.location.href);
       if (res.status === 401) {
-        window.open(AUTH_URL, '_self');
+        window.open(`${AUTH_URL}&redirect_uri=${cacheLocation}`, '_self');
       }
       // no-content
       if (res.status === 204) {
@@ -60,8 +66,31 @@ export function request(url, options) {
       }
       return newOptions.responseType === 'text' ? res.text : res.json();
     }).catch(err => {
-      notification.error({
-        description: err
-      });
+      if (err) {
+        notification.error({
+          description: JSON.stringify(err)
+        });
+      } else {
+        notification.error();
+      }
+
     });
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 初始化请求分页数据
+ * @Data 2019/11/8
+ */
+export function initPageParams(page) {
+  if (page) {
+    return {
+      page: page.current - 1,
+      size: page.pageSize
+    }
+  }
+  return {
+    page: 0,
+    size: 10
+  }
 }

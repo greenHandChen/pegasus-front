@@ -11,6 +11,7 @@ app.use(createLoading());
 
 // 3. 载入model
 app.model(require('./models/global').default);
+app.model(require('./models/platform/common').default);
 app.model(require('./models/authorize/login').default);
 app.model(require('./models/authorize/user').default);
 

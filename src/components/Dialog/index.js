@@ -22,7 +22,7 @@ const openDialog = (props) => {
 }
 
 export default {
-  open(props) {
+  renderDialog(props) {
     openDialog(props);
   }
 }

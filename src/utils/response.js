@@ -35,3 +35,18 @@ export function response(res) {
   }
   return res;
 }
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 处理分页参数
+ * @Data 2019/9/4
+ */
+export function paginationUtil(data) {
+  if (data && typeof data !== 'undefined') {
+    return {
+      total: data.total,
+      pageSize: data.size
+    }
+  }
+  return {};
+}

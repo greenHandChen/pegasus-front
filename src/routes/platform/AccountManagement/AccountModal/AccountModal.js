@@ -271,7 +271,6 @@ export default class AccountModal extends React.Component {
       }
     ]
 
-    console.log('accountForm.isActive ', accountForm.isActive, 'state.switchValue', this.state.switchValue);
     const content = (
       <React.Fragment>
         <Form className='ant-advanced-search-form' {...formLayout}>

@@ -7,7 +7,8 @@ import {request} from "../../utils/request";
  */
 export async function findProcessInstanceMonitor(params) {
   return request(`/v1/activiti/find/processInstanceMonitor`, {
-    method: 'GET'
+    method: 'GET',
+    query: params
   });
 }
 
@@ -30,6 +31,18 @@ export async function findProcessJumpNode(params) {
 export async function findDeliverTask(params) {
   return request(`/v1/activiti/find/deliverTask/${params.processInstanceId}`, {
     method: 'GET'
+  });
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 获取流程转交节点列表
+ * @Data 2019/8/28
+ */
+export async function findCounterSignAddOrReduceTask(params) {
+  return request(`/v1/activiti/find/counterSignAddOrReduceTask`, {
+    method: 'GET',
+    query: params
   });
 }
 
@@ -78,5 +91,27 @@ export async function deliverTask(params) {
   return request(`/v1/activiti/deliver/task`, {
     method: 'POST',
     body: params.deliverTargets
+  });
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 节点任务加签
+ * @Data 2019/8/28
+ */
+export async function counterSignAddTask(params) {
+  return request(`/v1/activiti/counterSignAdd/task/${params.taskId}/${params.assignee}`, {
+    method: 'POST'
+  });
+}
+
+/**
+ * @Author: enHui.Chen
+ * @Description: 节点任务减签
+ * @Data 2019/8/28
+ */
+export async function counterSignReduceTask(params) {
+  return request(`/v1/activiti/counterSignReduce/task/${params.taskId}`, {
+    method: 'POST'
   });
 }

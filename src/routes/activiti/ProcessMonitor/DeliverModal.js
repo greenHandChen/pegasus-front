@@ -75,7 +75,7 @@ export default class DeliverModal extends React.Component {
    * @Data 2019/11/1
    */
   handleConfirmModal = () => {
-    Dialog.open({
+    Dialog.renderDialog({
       content: '确定要进行批量转交吗?',
       onOk: () => this.handleBatchDeliverTask()
     });
