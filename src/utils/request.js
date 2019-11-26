@@ -18,7 +18,6 @@ const DEFAULT_OPTIONS = {
  */
 export function request(url, options) {
   let newOptions = {...DEFAULT_OPTIONS, ...options};
-
   let newUrl = `${API_HOST}${url}`;
 
   if (newOptions.method === 'POST' ||
