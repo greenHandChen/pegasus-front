@@ -450,7 +450,7 @@ export default class ProcessMonitor extends React.Component {
                   </Menu.Item>
                 </Menu>
               )}>
-                <a className="ant-dropdown-link" href="#">
+                <a className="ant-dropdown-link" target={'_blank'}>
                   加/减签 <Icon type="down"/>
                 </a>
               </Dropdown>

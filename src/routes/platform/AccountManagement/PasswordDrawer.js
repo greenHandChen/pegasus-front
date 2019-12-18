@@ -106,7 +106,6 @@ export default class PasswordDrawer extends React.Component {
     } = this.props;
 
     const {
-      id,
       username,
       title
     } = this.state;

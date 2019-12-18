@@ -116,9 +116,9 @@ export default class Lov extends React.Component {
   handleFormItemConditions = (conditions) => {
     // 计算批次
     const length = conditions.length, formItemConditions = [];
-    let batch = length % 2 === 0 ? length / 2 : parseInt(length / 2) + 1;
+    let batch = length % 2 === 0 ? length / 2 : parseInt(length / 2, 10) + 1;
     for (let i = 0; i < batch; i++) {
-      if (i == 0) {
+      if (i === 0) {
         formItemConditions.push(
           <Row key={`${i}-${conditions[i * 2].lovId}`}>
             {this.handleFormItemCols(conditions[i * 2], i * 2 !== length - 1 ? conditions[i * 2 + 1] : null)}
