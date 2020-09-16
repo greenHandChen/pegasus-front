@@ -1,3 +1,5 @@
+import {ALL} from "../../../config/config";
+
 /**
  * @Author: enHui.Chen
  * @Description: 获取当前用户信息
@@ -6,7 +8,7 @@
 import {request} from "../../utils/request";
 
 export async function getCurrentUser(params) {
-  return request("/v1/user/self", {
+  return request(`/${ALL}/v1/user/self`, {
     method: 'GET'
   })
 }

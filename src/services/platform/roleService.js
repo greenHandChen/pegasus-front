@@ -1,4 +1,5 @@
 import {request} from "../../utils/request";
+import {ALL} from "../../../config/config";
 
 /**
  * @Author: enHui.Chen
@@ -6,7 +7,7 @@ import {request} from "../../utils/request";
  * @Data 2019/9/27
  */
 export async function findRoleAll(params) {
-  return request("/v1/role/findRoleAll", {
+  return request(`/${ALL}/v1/role/findRoleAll`, {
     method: 'GET'
   })
 }
@@ -17,7 +18,7 @@ export async function findRoleAll(params) {
  * @Data 2019/9/27
  */
 export async function findRoleAllExcludeAdmin(params) {
-  return request("/v1/role/findRoleAll/excludeAdmin", {
+  return request(`/${ALL}/v1/role/findRoleAll/excludeAdmin`, {
     method: 'GET'
   })
 }
@@ -28,7 +29,7 @@ export async function findRoleAllExcludeAdmin(params) {
  * @Data 2019/9/26
  */
 export async function roleMenuBatchDispatch(params) {
-  return request(`/v1/role/roleMenu/batchDispatch/${params.roleId}`, {
+  return request(`/${ALL}/v1/role/roleMenu/batchDispatch/${params.roleId}`, {
     method: 'POST',
     body: params.menus
   })
@@ -40,7 +41,7 @@ export async function roleMenuBatchDispatch(params) {
  * @Data 2019/9/26
  */
 export async function roleCreateOrEdit(params) {
-  return request(`/v1/role/roleCreateOrEdit`, {
+  return request(`/${ALL}/v1/role/roleCreateOrEdit`, {
     method: 'POST',
     body: params
   })
@@ -52,7 +53,7 @@ export async function roleCreateOrEdit(params) {
  * @Data 2019/9/26
  */
 export async function roleCopyOrExtend(params) {
-  return request(`/v1/role/roleCopyOrExtend`, {
+  return request(`/${ALL}/v1/role/roleCopyOrExtend`, {
     method: 'POST',
     body: params
   })
@@ -64,7 +65,7 @@ export async function roleCopyOrExtend(params) {
  * @Data 2019/9/26
  */
 export async function roleActive(params) {
-  return request(`/v1/role/roleActive`, {
+  return request(`/${ALL}/v1/role/roleActive`, {
     method: 'PUT',
     body: params
   })
@@ -76,7 +77,7 @@ export async function roleActive(params) {
  * @Data 2019/9/26
  */
 export async function findAccountAllocatableRole(params) {
-  return request(`/v1/role/findAccountAllocatableRole/${params.userId}`, {
+  return request(`/${ALL}/v1/role/findAccountAllocatableRole/${params.userId}`, {
     method: 'GET'
   })
 }

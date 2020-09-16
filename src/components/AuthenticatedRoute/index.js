@@ -13,7 +13,7 @@ export default class AuthenticatedRoute extends React.Component {
   render() {
     const accessTokenGroup = window.location.href.match(ACCESS_TOKEN_REG);
     const accessToken = !accessTokenGroup || typeof accessTokenGroup === 'undefined' ? null : accessTokenGroup[0].split('=')[1];
-
+debugger
     if (accessToken) {
       setStorage(ACCESS_TOKEN, accessToken);
     }

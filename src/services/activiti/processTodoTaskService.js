@@ -1,4 +1,5 @@
 import {request} from "../../utils/request";
+import {ALL} from "../../../config/config";
 
 /**
  * @Author: enHui.Chen
@@ -6,7 +7,7 @@ import {request} from "../../utils/request";
  * @Data 2019/8/28
  */
 export async function findTaskAdminAssignee(params) {
-  return request(`/v1/activiti/find/task/adminAssignee`, {
+  return request(`/${ALL}/v1/activiti/find/task/adminAssignee`, {
     method: 'GET',
     query: params
   });
@@ -18,7 +19,7 @@ export async function findTaskAdminAssignee(params) {
  * @Data 2019/8/28
  */
 export async function completeTask(params) {
-  return request(`/v1/activiti/complete/task`, {
+  return request(`/${ALL}/v1/activiti/complete/task`, {
     method: 'POST',
     query: params
   });

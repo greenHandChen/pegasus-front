@@ -1,4 +1,5 @@
 import {request} from "../../utils/request";
+import {ALL} from "../../../config/config";
 
 /**
  * @Author: enHui.Chen
@@ -6,7 +7,7 @@ import {request} from "../../utils/request";
  * @Data 2019/8/28
  */
 export async function getProcessTemplateList(params) {
-  return request(`/v1/activiti/repository/process-definitions`, {
+  return request(`/${ALL}/v1/activiti/repository/process-definitions`, {
     method: 'GET',
     query: params
   });
@@ -18,7 +19,7 @@ export async function getProcessTemplateList(params) {
  * @Data 2019/8/28
  */
 export async function getProcessTestEmployeeList(params) {
-  return request(`/v1/activiti/find/processTest/employee`, {
+  return request(`/${ALL}/v1/activiti/find/processTest/employee`, {
     method: 'GET',
     query: params
   });
@@ -30,7 +31,7 @@ export async function getProcessTestEmployeeList(params) {
  * @Data 2019/8/28
  */
 export async function startProcessTest(params) {
-  return request(`/v1/activiti/start/processTest`, {
+  return request(`/${ALL}/v1/activiti/start/processTest`, {
     method: 'POST',
     query: params
   });

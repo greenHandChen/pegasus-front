@@ -1,4 +1,5 @@
 import {request} from "../../utils/request";
+import {ALL} from "../../../config/config";
 
 /**
  * @Author: enHui.Chen
@@ -6,7 +7,7 @@ import {request} from "../../utils/request";
  * @Data 2019/9/27
  */
 export async function findAccountAll(params) {
-  return request("/v1/user/findAccountAll", {
+  return request(`/${ALL}/v1/user/findAccountAll`, {
     method: 'GET'
   })
 }
@@ -17,7 +18,7 @@ export async function findAccountAll(params) {
  * @Data 2019/9/27
  */
 export async function createOrUpdateAccount(params) {
-  return request("/v1/user/createOrUpdateAccount", {
+  return request(`/${ALL}/v1/user/createOrUpdateAccount`, {
     method: 'POST',
     body: params
   })
@@ -29,7 +30,7 @@ export async function createOrUpdateAccount(params) {
  * @Data 2019/9/27
  */
 export async function findAccountByUserId(params) {
-  return request("/v1/user/findAccountByUserId", {
+  return request(`/${ALL}/v1/user/findAccountByUserId`, {
     method: 'GET',
     query: params
   })
@@ -41,7 +42,7 @@ export async function findAccountByUserId(params) {
  * @Data 2019/9/27
  */
 export async function findRoleListByUserId(params) {
-  return request("/v1/role/findRoleListByUserId", {
+  return request(`/${ALL}/v1/role/findRoleListByUserId`, {
     method: 'GET',
     query: params
   })
@@ -53,7 +54,7 @@ export async function findRoleListByUserId(params) {
  * @Data 2019/9/27
  */
 export async function dispatchRole(params) {
-  return request(`/v1/user/dispatchRole/${params.userId}`, {
+  return request(`/${ALL}/v1/user/dispatchRole/${params.userId}`, {
     method: 'POST',
     body: params.roleIds
   })
@@ -65,7 +66,7 @@ export async function dispatchRole(params) {
  * @Data 2019/9/27
  */
 export async function deleteDispatchRole(params) {
-  return request(`/v1/user/deleteDispatchRole/${params.userId}`, {
+  return request(`/${ALL}/v1/user/deleteDispatchRole/${params.userId}`, {
     method: 'DELETE',
     body: params.roleIds
   })
@@ -77,7 +78,7 @@ export async function deleteDispatchRole(params) {
  * @Data 2019/9/27
  */
 export async function modifyPassword(params) {
-  return request(`/v1/user/modifyPassword`, {
+  return request(`/${ALL}/v1/user/modifyPassword`, {
     method: 'PUT',
     body: params
   })

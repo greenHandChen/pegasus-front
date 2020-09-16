@@ -1,4 +1,5 @@
 import {request} from "../../utils/request";
+import {ALL} from "../../../config/config";
 
 /**
  * @Author: enHui.Chen
@@ -6,7 +7,7 @@ import {request} from "../../utils/request";
  * @Data 2019/9/27
  */
 export async function lovQuery(params) {
-  return request(`/v1/common/lov/query/${params.code}`, {
+  return request(`/${ALL}/v1/common/lov/query/${params.code}`, {
     method: 'GET',
     query: {
       page: params.page,

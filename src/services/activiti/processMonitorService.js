@@ -1,4 +1,5 @@
 import {request} from "../../utils/request";
+import {ALL} from "../../../config/config";
 
 /**
  * @Author: enHui.Chen
@@ -6,7 +7,7 @@ import {request} from "../../utils/request";
  * @Data 2019/8/28
  */
 export async function findProcessInstanceMonitor(params) {
-  return request(`/v1/activiti/find/processInstanceMonitor`, {
+  return request(`/${ALL}/v1/activiti/find/processInstanceMonitor`, {
     method: 'GET',
     query: params
   });
@@ -18,7 +19,7 @@ export async function findProcessInstanceMonitor(params) {
  * @Data 2019/8/28
  */
 export async function findProcessJumpNode(params) {
-  return request(`/v1/activiti/find/processJumpNode/${params.processDefinitionId}`, {
+  return request(`/${ALL}/v1/activiti/find/processJumpNode/${params.processDefinitionId}`, {
     method: 'GET'
   });
 }
@@ -29,7 +30,7 @@ export async function findProcessJumpNode(params) {
  * @Data 2019/8/28
  */
 export async function findDeliverTask(params) {
-  return request(`/v1/activiti/find/deliverTask/${params.processInstanceId}`, {
+  return request(`/${ALL}/v1/activiti/find/deliverTask/${params.processInstanceId}`, {
     method: 'GET'
   });
 }
@@ -40,7 +41,7 @@ export async function findDeliverTask(params) {
  * @Data 2019/8/28
  */
 export async function findCounterSignAddOrReduceTask(params) {
-  return request(`/v1/activiti/find/counterSignAddOrReduceTask`, {
+  return request(`/${ALL}/v1/activiti/find/counterSignAddOrReduceTask`, {
     method: 'GET',
     query: params
   });
@@ -52,7 +53,7 @@ export async function findCounterSignAddOrReduceTask(params) {
  * @Data 2019/8/28
  */
 export async function jumpTask(params) {
-  return request(`/v1/activiti/jump/task`, {
+  return request(`/${ALL}/v1/activiti/jump/task`, {
     method: 'POST',
     query: params
   });
@@ -64,7 +65,7 @@ export async function jumpTask(params) {
  * @Data 2019/8/28
  */
 export async function finishTask(params) {
-  return request(`/v1/activiti/delete/task`, {
+  return request(`/${ALL}/v1/activiti/delete/task`, {
     method: 'POST',
     query: params
   });
@@ -76,7 +77,7 @@ export async function finishTask(params) {
  * @Data 2019/8/28
  */
 export async function suspendOrActiveTask(params) {
-  return request(`/v1/activiti/suspendOrActive/task`, {
+  return request(`/${ALL}/v1/activiti/suspendOrActive/task`, {
     method: 'POST',
     query: params
   });
@@ -88,7 +89,7 @@ export async function suspendOrActiveTask(params) {
  * @Data 2019/8/28
  */
 export async function deliverTask(params) {
-  return request(`/v1/activiti/deliver/task`, {
+  return request(`/${ALL}/v1/activiti/deliver/task`, {
     method: 'POST',
     body: params.deliverTargets
   });
@@ -100,7 +101,7 @@ export async function deliverTask(params) {
  * @Data 2019/8/28
  */
 export async function counterSignAddTask(params) {
-  return request(`/v1/activiti/counterSignAdd/task/${params.taskId}/${params.assignee}`, {
+  return request(`/${ALL}/v1/activiti/counterSignAdd/task/${params.taskId}/${params.assignee}`, {
     method: 'POST'
   });
 }
@@ -111,7 +112,7 @@ export async function counterSignAddTask(params) {
  * @Data 2019/8/28
  */
 export async function counterSignReduceTask(params) {
-  return request(`/v1/activiti/counterSignReduce/task/${params.taskId}`, {
+  return request(`/${ALL}/v1/activiti/counterSignReduce/task/${params.taskId}`, {
     method: 'POST'
   });
 }

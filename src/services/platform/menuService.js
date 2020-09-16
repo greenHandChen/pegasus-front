@@ -1,3 +1,5 @@
+import {ALL} from "../../../config/config";
+
 /**
  * @Author: enHui.Chen
  * @Description: 初始化菜单-test
@@ -6,7 +8,7 @@
 import {request} from "../../utils/request";
 
 export async function findMenuAll(params) {
-  return request("/v1/menu/findMenuAll", {
+  return request(`/${ALL}/v1/menu/findMenuAll`, {
     method: 'GET'
   })
 }
@@ -18,7 +20,7 @@ export async function findMenuAll(params) {
  * @Data 2019/9/26
  */
 export async function initMenuByRoleId(params) {
-  return request("/v1/menu/initMenuByRoleId?roleId=1", {
+  return request(`/${ALL}/v1/menu/initMenuByRoleId?roleId=1`, {
     method: 'GET',
     query: params
   })
@@ -30,7 +32,7 @@ export async function initMenuByRoleId(params) {
  * @Data 2019/9/26
  */
 export async function activeOrForbidMenu(params) {
-  return request("/v1/menu/activeOrForbidMenu/menu", {
+  return request(`/${ALL}/v1/menu/activeOrForbidMenu/menu`, {
     method: 'POST',
     body: params
   })
@@ -42,7 +44,7 @@ export async function activeOrForbidMenu(params) {
  * @Data 2019/9/26
  */
 export async function createOrUpdateMenu(params) {
-  return request("/v1/menu/createOrUpdate/menu", {
+  return request(`/${ALL}/v1/menu/createOrUpdate/menu`, {
     method: 'POST',
     body: params
   })
@@ -54,7 +56,7 @@ export async function createOrUpdateMenu(params) {
  * @Data 2019/9/26
  */
 export async function findMenuById(params) {
-  return request("/v1/menu/findMenuById", {
+  return request(`/${ALL}/v1/menu/findMenuById`, {
     method: 'GET',
     query: params
   })
@@ -66,7 +68,7 @@ export async function findMenuById(params) {
  * @Data 2019/9/26
  */
 export async function findTiledMenuByRoleId(params) {
-  return request("/v1/menu/findTiledMenuByRoleId", {
+  return request(`/${ALL}/v1/menu/findTiledMenuByRoleId`, {
     method: 'GET',
     query: params
   })
@@ -78,7 +80,7 @@ export async function findTiledMenuByRoleId(params) {
  * @Data 2019/9/26
  */
 export async function findMenuByMenuName(params) {
-  return request("/v1/menu/findMenuByMenuName", {
+  return request(`/${ALL}/v1/menu/findMenuByMenuName`, {
     method: 'GET',
     query: params
   })
